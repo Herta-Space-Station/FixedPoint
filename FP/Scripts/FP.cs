@@ -95,33 +95,21 @@ namespace Thief
         ///     The smallest FP unit that is not 0.
         ///     <para>Closest double: 1.52587890625E-05</para>
         /// </summary>
-        public static FP SmallestNonZero
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(1L);
-        }
+        public static readonly FP SmallestNonZero = Cast(1L);
 
         /// <summary>
         ///     Minimum FP value, but values outside of <see cref="P:Thief.FP.UseableMin" /> and
         ///     <see cref="P:Thief.FP.UseableMax" /> (inclusive) can overflow when multiplied.
         ///     <para>Closest double: -140737488355328</para>
         /// </summary>
-        public static FP MinValue
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(long.MinValue);
-        }
+        public static readonly FP MinValue = Cast(long.MinValue);
 
         /// <summary>
         ///     Maximum FP value, but values outside of <see cref="P:Thief.FP.UseableMin" /> and
         ///     <see cref="P:Thief.FP.UseableMax" /> (inclusive) can overflow when multiplied.
         ///     <para>Closest double: 140737488355328</para>
         /// </summary>
-        public static FP MaxValue
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(long.MaxValue);
-        }
+        public static readonly FP MaxValue = Cast(long.MaxValue);
 
         /// <summary>
         ///     Represents the highest negative FP number that can be multiplied with itself and not cause an overflow (exceeding
@@ -149,671 +137,403 @@ namespace Thief
         ///     Pi number.
         ///     <para>Closest double: 3.14158630371094</para>
         /// </summary>
-        public static FP Pi
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(205887L);
-        }
+        public static readonly FP Pi = Cast(205887L);
 
         /// <summary>
         ///     1/Pi.
         ///     <para>Closest double: 0.318313598632813</para>
         /// </summary>
-        public static FP PiInv
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(20861L);
-        }
+        public static readonly FP PiInv = Cast(20861L);
 
         /// <summary>
         ///     2 * Pi.
         ///     <para>Closest double: 6.28318786621094</para>
         /// </summary>
-        public static FP PiTimes2
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(411775L);
-        }
+        public static readonly FP PiTimes2 = Cast(411775L);
 
         /// <summary>
         ///     Pi / 2.
         ///     <para>Closest double: 1.57080078125</para>
         /// </summary>
-        public static FP PiOver2
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(102944L);
-        }
+        public static readonly FP PiOver2 = Cast(102944L);
 
         /// <summary>
         ///     2 / Pi.
         ///     <para>Closest double: 0.636627197265625</para>
         /// </summary>
-        public static FP PiOver2Inv
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(41722L);
-        }
+        public static readonly FP PiOver2Inv = Cast(41722L);
 
         /// <summary>
         ///     Pi / 4.
         ///     <para>Closest double: 0.785400390625</para>
         /// </summary>
-        public static FP PiOver4
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(51472L);
-        }
+        public static readonly FP PiOver4 = Cast(51472L);
 
         /// <summary>
         ///     3 * Pi / 4.
         ///     <para>Closest double: 2.356201171875</para>
         /// </summary>
-        public static FP Pi3Over4
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(154416L);
-        }
+        public static readonly FP Pi3Over4 = Cast(154416L);
 
         /// <summary>
         ///     4 * Pi / 3.
         ///     <para>Closest double: 4.18879699707031</para>
         /// </summary>
-        public static FP Pi4Over3
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(274517L);
-        }
+        public static readonly FP Pi4Over3 = Cast(274517L);
 
         /// <summary>
         ///     Degrees-to-radians conversion constant.
         ///     <para>Closest double: 0.0174560546875</para>
         /// </summary>
-        public static FP Deg2Rad
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(1144L);
-        }
+        public static readonly FP Deg2Rad = Cast(1144L);
 
         /// <summary>
         ///     Radians-to-degrees conversion constant.
         ///     <para>Closest double: 57.2957763671875</para>
         /// </summary>
-        public static FP Rad2Deg
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(3754936L);
-        }
+        public static readonly FP Rad2Deg = Cast(3754936L);
 
         /// <summary>
         ///     FP constant representing the number 0.
         ///     <para>Closest double: 0</para>
         /// </summary>
-        public static FP _0
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(0L);
-        }
+        public static readonly FP _0 = Cast(0L);
 
         /// <summary>
         ///     FP constant representing the number 1.
         ///     <para>Closest double: 1</para>
         /// </summary>
-        public static FP _1
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(65536L);
-        }
+        public static readonly FP _1 = Cast(65536L);
 
         /// <summary>
         ///     FP constant representing the number 2.
         ///     <para>Closest double: 2</para>
         /// </summary>
-        public static FP _2
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(131072L);
-        }
+        public static readonly FP _2 = Cast(131072L);
 
         /// <summary>
         ///     FP constant representing the number 3.
         ///     <para>Closest double: 3</para>
         /// </summary>
-        public static FP _3
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(196608L);
-        }
+        public static readonly FP _3 = Cast(196608L);
 
         /// <summary>
         ///     FP constant representing the number 4.
         ///     <para>Closest double: 4</para>
         /// </summary>
-        public static FP _4
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(262144L);
-        }
+        public static readonly FP _4 = Cast(262144L);
 
         /// <summary>
         ///     FP constant representing the number 5.
         ///     <para>Closest double: 5</para>
         /// </summary>
-        public static FP _5
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(327680L);
-        }
+        public static readonly FP _5 = Cast(327680L);
 
         /// <summary>
         ///     FP constant representing the number 6.
         ///     <para>Closest double: 6</para>
         /// </summary>
-        public static FP _6
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(393216L);
-        }
+        public static readonly FP _6 = Cast(393216L);
 
         /// <summary>
         ///     FP constant representing the number 7.
         ///     <para>Closest double: 7</para>
         /// </summary>
-        public static FP _7
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(458752L);
-        }
+        public static readonly FP _7 = Cast(458752L);
 
         /// <summary>
         ///     FP constant representing the number 8.
         ///     <para>Closest double: 8</para>
         /// </summary>
-        public static FP _8
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(524288L);
-        }
+        public static readonly FP _8 = Cast(524288L);
 
         /// <summary>
         ///     FP constant representing the number 9.
         ///     <para>Closest double: 9</para>
         /// </summary>
-        public static FP _9
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(589824L);
-        }
+        public static readonly FP _9 = Cast(589824L);
 
         /// <summary>
         ///     FP constant representing the number 10.
         ///     <para>Closest double: 10</para>
         /// </summary>
-        public static FP _10
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(655360L);
-        }
+        public static readonly FP _10 = Cast(655360L);
 
         /// <summary>
         ///     FP constant representing the number 99.
         ///     <para>Closest double: 99</para>
         /// </summary>
-        public static FP _99
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(6488064L);
-        }
+        public static readonly FP _99 = Cast(6488064L);
 
         /// <summary>
         ///     FP constant representing the number 100.
         ///     <para>Closest double: 100</para>
         /// </summary>
-        public static FP _100
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(6553600L);
-        }
+        public static readonly FP _100 = Cast(6553600L);
 
         /// <summary>
         ///     FP constant representing the number 180.
         ///     <para>Closest double: 180</para>
         /// </summary>
-        public static FP _180
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(11796480L);
-        }
+        public static readonly FP _180 = Cast(11796480L);
 
         /// <summary>
         ///     FP constant representing the number 200.
         ///     <para>Closest double: 200</para>
         /// </summary>
-        public static FP _200
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(13107200L);
-        }
+        public static readonly FP _200 = Cast(13107200L);
 
         /// <summary>
         ///     FP constant representing the number 360.
         ///     <para>Closest double: 360</para>
         /// </summary>
-        public static FP _360
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(23592960L);
-        }
+        public static readonly FP _360 = Cast(23592960L);
 
         /// <summary>
         ///     FP constant representing the number 1000.
         ///     <para>Closest double: 1000</para>
         /// </summary>
-        public static FP _1000
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(65536000L);
-        }
+        public static readonly FP _1000 = Cast(65536000L);
 
         /// <summary>
         ///     FP constant representing the number 10000.
         ///     <para>Closest double: 10000</para>
         /// </summary>
-        public static FP _10000
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(655360000L);
-        }
+        public static readonly FP _10000 = Cast(655360000L);
 
         /// <summary>
         ///     FP constant representing the number 0.01.
         ///     <para>Closest double: 0.0099945068359375</para>
         /// </summary>
-        public static FP _0_01
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(655L);
-        }
+        public static readonly FP _0_01 = Cast(655L);
 
         /// <summary>
         ///     FP constant representing the number 0.02.
         ///     <para>Closest double: 0.0200042724609375</para>
         /// </summary>
-        public static FP _0_02
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(1311L);
-        }
+        public static readonly FP _0_02 = Cast(1311L);
 
         /// <summary>
         ///     FP constant representing the number 0.03.
         ///     <para>Closest double: 0.029998779296875</para>
         /// </summary>
-        public static FP _0_03
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(1966L);
-        }
+        public static readonly FP _0_03 = Cast(1966L);
 
         /// <summary>
         ///     FP constant representing the number 0.04.
         ///     <para>Closest double: 0.0399932861328125</para>
         /// </summary>
-        public static FP _0_04
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(2621L);
-        }
+        public static readonly FP _0_04 = Cast(2621L);
 
         /// <summary>
         ///     FP constant representing the number 0.05.
         ///     <para>Closest double: 0.0500030517578125</para>
         /// </summary>
-        public static FP _0_05
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(3277L);
-        }
+        public static readonly FP _0_05 = Cast(3277L);
 
         /// <summary>
         ///     FP constant representing the number 0.10.
         ///     <para>Closest double: 0.100006103515625</para>
         /// </summary>
-        public static FP _0_10
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(6554L);
-        }
+        public static readonly FP _0_10 = Cast(6554L);
 
         /// <summary>
         ///     FP constant representing the number 0.20.
         ///     <para>Closest double: 0.199996948242188</para>
         /// </summary>
-        public static FP _0_20
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(13107L);
-        }
+        public static readonly FP _0_20 = Cast(13107L);
 
         /// <summary>
         ///     FP constant representing the number 0.25.
         ///     <para>Closest double: 0.25</para>
         /// </summary>
-        public static FP _0_25
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(16384L);
-        }
+        public static readonly FP _0_25 = Cast(16384L);
 
         /// <summary>
         ///     FP constant representing the number 0.50.
         ///     <para>Closest double: 0.5</para>
         /// </summary>
-        public static FP _0_50
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(32768L);
-        }
+        public static readonly FP _0_50 = Cast(32768L);
 
         /// <summary>
         ///     FP constant representing the number 0.75.
         ///     <para>Closest double: 0.75</para>
         /// </summary>
-        public static FP _0_75
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(49152L);
-        }
+        public static readonly FP _0_75 = Cast(49152L);
 
         /// <summary>
         ///     FP constant representing the number 0.33.
         ///     <para>Closest double: 0.333328247070313</para>
         /// </summary>
-        public static FP _0_33
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(21845L);
-        }
+        public static readonly FP _0_33 = Cast(21845L);
 
         /// <summary>
         ///     FP constant representing the number 0.99.
         ///     <para>Closest double: 0.990005493164063</para>
         /// </summary>
-        public static FP _0_99
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(64881L);
-        }
+        public static readonly FP _0_99 = Cast(64881L);
 
         /// <summary>
         ///     FP constant representing the number -1.
         ///     <para>Closest double: -1</para>
         /// </summary>
-        public static FP Minus_1
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(-65536L);
-        }
+        public static readonly FP Minus_1 = Cast(-65536L);
 
         /// <summary>
         ///     FP constant representing 360 degrees in radian.
         ///     <para>Closest double: 6.28318786621094</para>
         /// </summary>
-        public static FP Rad_360
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(411775L);
-        }
+        public static readonly FP Rad_360 = Cast(411775L);
 
         /// <summary>
         ///     FP constant representing 180 degrees in radian.
         ///     <para>Closest double: 3.14158630371094</para>
         /// </summary>
-        public static FP Rad_180
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(205887L);
-        }
+        public static readonly FP Rad_180 = Cast(205887L);
 
         /// <summary>
         ///     FP constant representing 90 degrees in radian.
         ///     <para>Closest double: 1.57080078125</para>
         /// </summary>
-        public static FP Rad_90
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(102944L);
-        }
+        public static readonly FP Rad_90 = Cast(102944L);
 
         /// <summary>
         ///     FP constant representing 45 degrees in radian.
         ///     <para>Closest double: 0.785400390625</para>
         /// </summary>
-        public static FP Rad_45
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(51472L);
-        }
+        public static readonly FP Rad_45 = Cast(51472L);
 
         /// <summary>
         ///     FP constant representing 22.5 degrees in radian.
         ///     <para>Closest double: 0.3927001953125</para>
         /// </summary>
-        public static FP Rad_22_50
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(25736L);
-        }
+        public static readonly FP Rad_22_50 = Cast(25736L);
 
         /// <summary>
         ///     FP constant representing the number 1.01.
         ///     <para>Closest double: 1.00999450683594</para>
         /// </summary>
-        public static FP _1_01
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(66191L);
-        }
+        public static readonly FP _1_01 = Cast(66191L);
 
         /// <summary>
         ///     FP constant representing the number 1.02.
         ///     <para>Closest double: 1.02000427246094</para>
         /// </summary>
-        public static FP _1_02
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(66847L);
-        }
+        public static readonly FP _1_02 = Cast(66847L);
 
         /// <summary>
         ///     FP constant representing the number 1.03.
         ///     <para>Closest double: 1.02999877929688</para>
         /// </summary>
-        public static FP _1_03
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(67502L);
-        }
+        public static readonly FP _1_03 = Cast(67502L);
 
         /// <summary>
         ///     FP constant representing the number 1.04.
         ///     <para>Closest double: 1.03999328613281</para>
         /// </summary>
-        public static FP _1_04
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(68157L);
-        }
+        public static readonly FP _1_04 = Cast(68157L);
 
         /// <summary>
         ///     FP constant representing the number 1.05.
         ///     <para>Closest double: 1.05000305175781</para>
         /// </summary>
-        public static FP _1_05
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(68813L);
-        }
+        public static readonly FP _1_05 = Cast(68813L);
 
         /// <summary>
         ///     FP constant representing the number 1.10.
         ///     <para>Closest double: 1.10000610351563</para>
         /// </summary>
-        public static FP _1_10
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(72090L);
-        }
+        public static readonly FP _1_10 = Cast(72090L);
 
         /// <summary>
         ///     FP constant representing the number 1.20.
         ///     <para>Closest double: 1.19999694824219</para>
         /// </summary>
-        public static FP _1_20
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(78643L);
-        }
+        public static readonly FP _1_20 = Cast(78643L);
 
         /// <summary>
         ///     FP constant representing the number 1.25.
         ///     <para>Closest double: 1.25</para>
         /// </summary>
-        public static FP _1_25
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(81920L);
-        }
+        public static readonly FP _1_25 = Cast(81920L);
 
         /// <summary>
         ///     FP constant representing the number 1.50.
         ///     <para>Closest double: 1.5</para>
         /// </summary>
-        public static FP _1_50
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(98304L);
-        }
+        public static readonly FP _1_50 = Cast(98304L);
 
         /// <summary>
         ///     FP constant representing the number 1.75.
         ///     <para>Closest double: 1.75</para>
         /// </summary>
-        public static FP _1_75
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(114688L);
-        }
+        public static readonly FP _1_75 = Cast(114688L);
 
         /// <summary>
         ///     FP constant representing the number 1.33.
         ///     <para>Closest double: 1.33332824707031</para>
         /// </summary>
-        public static FP _1_33
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(87381L);
-        }
+        public static readonly FP _1_33 = Cast(87381L);
 
         /// <summary>
         ///     FP constant representing the number 1.99.
         ///     <para>Closest double: 1.99000549316406</para>
         /// </summary>
-        public static FP _1_99
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(130417L);
-        }
+        public static readonly FP _1_99 = Cast(130417L);
 
         /// <summary>
         ///     FP constant representing the epsilon value EN1.
         ///     <para>Closest double: 0.100006103515625</para>
         /// </summary>
-        public static FP EN1
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(6554L);
-        }
+        public static readonly FP EN1 = Cast(6554L);
 
         /// <summary>
         ///     FP constant representing the epsilon value EN2.
         ///     <para>Closest double: 0.0099945068359375</para>
         /// </summary>
-        public static FP EN2
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(655L);
-        }
+        public static readonly FP EN2 = Cast(655L);
 
         /// <summary>
         ///     FP constant representing the epsilon value EN3.
         ///     <para>Closest double: 0.001007080078125</para>
         /// </summary>
-        public static FP EN3
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(66L);
-        }
+        public static readonly FP EN3 = Cast(66L);
 
         /// <summary>
         ///     FP constant representing the epsilon value EN4.
         ///     <para>Closest double: 0.0001068115234375</para>
         /// </summary>
-        public static FP EN4
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(7L);
-        }
+        public static readonly FP EN4 = Cast(7L);
 
         /// <summary>
         ///     FP constant representing the epsilon value EN5.
         ///     <para>Closest double: 1.52587890625E-05</para>
         /// </summary>
-        public static FP EN5
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(1L);
-        }
+        public static readonly FP EN5 = Cast(1L);
 
         /// <summary>
         ///     FP constant representing Epsilon <see cref="P:Thief.FP.EN3" />.
         ///     <para>Closest double: 0.001007080078125</para>
         /// </summary>
-        public static FP Epsilon
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(66L);
-        }
+        public static readonly FP Epsilon = Cast(66L);
 
         /// <summary>
         ///     FP constant representing the Euler Number constant.
         ///     <para>Closest double: 2.71827697753906</para>
         /// </summary>
-        public static FP E
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(178145L);
-        }
+        public static readonly FP E = Cast(178145L);
 
         /// <summary>
         ///     FP constant representing Log(E).
         ///     <para>Closest double: 1.44268798828125</para>
         /// </summary>
-        public static FP Log2_E
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(94548L);
-        }
+        public static readonly FP Log2_E = Cast(94548L);
 
         /// <summary>
         ///     FP constant representing Log(10).
         ///     <para>Closest double: 3.32192993164063</para>
         /// </summary>
-        public static FP Log2_10
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast(217706L);
-        }
+        public static readonly FP Log2_10 = Cast(217706L);
 
         /// <summary>Returns integral part as long.</summary>
         public long AsLong
