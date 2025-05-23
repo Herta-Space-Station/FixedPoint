@@ -5,18 +5,14 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-        <RootNamespace>ConsoleApp37Fix</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FP\FP.csproj" />
+      <PackageReference Include="BenchmarkDotNet" Version="0.15.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="FPLut">
-        <HintPath>..\FP\FPLut.dll</HintPath>
-      </Reference>
+      <ProjectReference Include="..\FP\FP.csproj" />
     </ItemGroup>
 
 </Project>

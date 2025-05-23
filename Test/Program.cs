@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.IO.Compression;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Thief;
@@ -14,12 +16,31 @@ namespace Test
 
         private static void Main()
         {
-            FP a = 0.01;
-            a += 0.1;
-            string str = a.ToString();
-            Console.WriteLine(str);
-            FP b = FP.Parse("0.11");
-            Console.WriteLine(b.AsDouble);
+            Console.WriteLine(FP.FromDouble_SAFE(100.0).AsDouble);
+        }
+
+        private static void Test2()
+        {
+            for (int i = 0; i < 1024 * 1024; ++i)
+            {
+                FP a = FPRandom.Shared.Next(0, 1);
+                if (a < 0 || a >= 1)
+                    throw new Exception("error");
+
+                Console.WriteLine(a);
+            }
+
+            Console.WriteLine("done");
+        }
+
+        private static void Test1()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            GZipStream stream = new GZipStream(memoryStream, CompressionLevel.SmallestSize);
+            stream.Write(MemoryMarshal.Cast<long, byte>(FPLut.Acos));
+            Console.WriteLine(memoryStream.Length);
+            Console.WriteLine(FPLut.Acos.Length);
+            Console.WriteLine(MemoryMarshal.Cast<long, byte>(FPLut.Acos).Length);
         }
     }
 }

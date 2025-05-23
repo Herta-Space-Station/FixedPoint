@@ -41,7 +41,7 @@ namespace Thief
     /// </remarks>
     /// <seealso cref="T:Thief.FPLut" />
     [Serializable]
-    [StructLayout(LayoutKind.Explicit)]
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct FP : IEquatable<FP>, IComparable<FP>
     {
         /// <summary>
@@ -585,7 +585,7 @@ namespace Thief
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal FP(long v) => this.RawValue = v;
+        internal FP(in long v) => this = Unsafe.As<long, FP>(ref Unsafe.AsRef(in v));
 
         /// <summary>
         ///     Compares this instance of FP to another instance and returns an integer that indicates whether this instance is
@@ -870,7 +870,7 @@ namespace Thief
                     v = checked(FP.ParseInteger(local1) + FP.ParseFractions(local2));
                     break;
                 default:
-                    throw new Exception("Unknown: " + s.ToString());
+                    throw new FormatException(s.ToString());
             }
 
             return flag1 ? new FP(-v) : new FP(v);
@@ -927,7 +927,8 @@ namespace Thief
                     v = checked(FP.ParseInteger(local1) + FP.ParseFractions(local2));
                     break;
                 default:
-                    throw new Exception("Unknown: " + s.ToString());
+                    result = default;
+                    return false;
             }
 
             result = flag1 ? new FP(-v) : new FP(v);
