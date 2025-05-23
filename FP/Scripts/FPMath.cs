@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 #pragma warning disable CA2208
 #pragma warning disable CS8632
@@ -151,8 +152,10 @@ namespace Thief
         /// <summary>Returns the smallest of two or more values.</summary>
         /// <param name="numbers"></param>
         /// <returns></returns>
-        public static FP Min(params FP[] numbers)
+        public static FP Min(ReadOnlySpan<FP> numbers)
         {
+            if (Unsafe.IsNullRef(ref MemoryMarshal.GetReference(numbers)) || numbers.Length == 0)
+                return new FP();
             FP val1 = numbers[0];
             for (int index = 1; index < numbers.Length; ++index)
                 val1 = FPMath.Min(val1, numbers[index]);
@@ -189,8 +192,10 @@ namespace Thief
         /// <summary>Returns the largest of two or more values.</summary>
         /// <param name="numbers"></param>
         /// <returns></returns>
-        public static FP Max(params FP[] numbers)
+        public static FP Max(ReadOnlySpan<FP> numbers)
         {
+            if (Unsafe.IsNullRef(ref MemoryMarshal.GetReference(numbers)) || numbers.Length == 0)
+                return new FP();
             FP val1 = numbers[0];
             for (int index = 1; index < numbers.Length; ++index)
                 val1 = FPMath.Max(val1, numbers[index]);
