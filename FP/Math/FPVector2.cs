@@ -501,9 +501,9 @@ namespace Thief
         /// </summary>
         /// <param name="vectors"></param>
         /// <returns></returns>
-        public static FPVector2 Max(params FPVector2[] vectors)
+        public static FPVector2 Max(ReadOnlySpan<FPVector2> vectors)
         {
-            if (vectors == null || vectors.Length == 0)
+            if (Unsafe.IsNullRef(ref MemoryMarshal.GetReference(vectors)) || vectors.Length == 0)
                 return new FPVector2();
             FPVector2 vector = vectors[0];
             for (int index = 1; index < vectors.Length; ++index)
@@ -530,9 +530,9 @@ namespace Thief
         /// </summary>
         /// <param name="vectors"></param>
         /// <returns></returns>
-        public static FPVector2 Min(params FPVector2[] vectors)
+        public static FPVector2 Min(ReadOnlySpan<FPVector2> vectors)
         {
-            if (vectors == null || vectors.Length == 0)
+            if (Unsafe.IsNullRef(ref MemoryMarshal.GetReference(vectors)) || vectors.Length == 0)
                 return new FPVector2();
             FPVector2 vector = vectors[0];
             for (int index = 1; index < vectors.Length; ++index)
