@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>A serializable equivalent of Nullable&lt;FP&gt;.</summary>
     /// \ingroup MathAPI
@@ -33,7 +33,7 @@ namespace Thief
         /// <summary>Returns current value.</summary>
         /// <exception cref="T:System.NullReferenceException">
         ///     If
-        ///     <see cref="P:Thief.NullableNonNegativeFP.HasValue" /> is <see langword="false" />
+        ///     <see cref="P:Herta.NullableNonNegativeFP.HasValue" /> is <see langword="false" />
         /// </exception>
         public FP Value
         {
@@ -49,8 +49,8 @@ namespace Thief
         }
 
         /// <summary>
-        ///     If <see cref="P:Thief.NullableNonNegativeFP.HasValue" /> is <see langword="true" />, returns
-        ///     <see cref="P:Thief.NullableNonNegativeFP.Value" />. Otherwise returns zero.
+        ///     If <see cref="P:Herta.NullableNonNegativeFP.HasValue" /> is <see langword="true" />, returns
+        ///     <see cref="P:Herta.NullableNonNegativeFP.Value" />. Otherwise returns zero.
         /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

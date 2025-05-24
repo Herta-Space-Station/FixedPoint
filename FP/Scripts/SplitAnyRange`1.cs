@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     [StructLayout(LayoutKind.Sequential)]
     public readonly ref struct SplitAnyRange<T> where T : IEquatable<T>

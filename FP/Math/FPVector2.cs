@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>Represents a 2D Vector</summary>
     /// \ingroup MathAPI
@@ -29,7 +29,7 @@ namespace Thief
 
         /// <summary>
         ///     Normalizes the given vector. If the vector is too short to normalize,
-        ///     <see cref="P:Thief.FPVector2.Zero" /> will be returned.
+        ///     <see cref="P:Herta.FPVector2.Zero" /> will be returned.
         /// </summary>
         /// <param name="value">The vector which should be normalized.</param>
         /// <returns>A normalized vector.</returns>
@@ -47,7 +47,7 @@ namespace Thief
 
         /// <summary>
         ///     Normalizes the given vector. If the vector is too short to normalize,
-        ///     <see cref="P:Thief.FPVector2.Zero" /> will be returned.
+        ///     <see cref="P:Herta.FPVector2.Zero" /> will be returned.
         /// </summary>
         /// <param name="value">The vector which should be normalized.</param>
         /// <param name="magnitude">The original vector's magnitude.</param>
@@ -71,10 +71,10 @@ namespace Thief
         }
 
         /// <summary>A vector with components (0,0);</summary>
-        public static FPVector2 Zero => new FPVector2();
+        public static readonly FPVector2 Zero = new FPVector2();
 
         /// <summary>A vector with components (1,1);</summary>
-        public static FPVector2 One => new FPVector2()
+        public static readonly FPVector2 One = new FPVector2()
         {
             X =
             {
@@ -87,7 +87,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (1,0);</summary>
-        public static FPVector2 Right => new FPVector2()
+        public static readonly FPVector2 Right = new FPVector2()
         {
             X =
             {
@@ -96,7 +96,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (-1,0);</summary>
-        public static FPVector2 Left => new FPVector2()
+        public static readonly FPVector2 Left = new FPVector2()
         {
             X =
             {
@@ -105,7 +105,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (0,1);</summary>
-        public static FPVector2 Up => new FPVector2()
+        public static readonly FPVector2 Up = new FPVector2()
         {
             Y =
             {
@@ -114,7 +114,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (0,-1);</summary>
-        public static FPVector2 Down => new FPVector2()
+        public static readonly FPVector2 Down = new FPVector2()
         {
             Y =
             {
@@ -126,7 +126,7 @@ namespace Thief
         ///     A vector with components
         ///     (FP.MinValue,FP.MinValue);
         /// </summary>
-        public static FPVector2 MinValue => new FPVector2()
+        public static readonly FPVector2 MinValue = new FPVector2()
         {
             X =
             {
@@ -142,7 +142,7 @@ namespace Thief
         ///     A vector with components
         ///     (FP.MaxValue,FP.MaxValue);
         /// </summary>
-        public static FPVector2 MaxValue => new FPVector2()
+        public static readonly FPVector2 MaxValue = new FPVector2()
         {
             X =
             {
@@ -158,7 +158,7 @@ namespace Thief
         ///     A vector with components
         ///     (FP.UseableMin,FP.UseableMin);
         /// </summary>
-        public static FPVector2 UseableMin => new FPVector2()
+        public static readonly FPVector2 UseableMin = new FPVector2()
         {
             X =
             {
@@ -174,7 +174,7 @@ namespace Thief
         ///     A vector with components
         ///     (FP.UseableMax,FP.UseableMax);
         /// </summary>
-        public static FPVector2 UseableMax => new FPVector2()
+        public static readonly FPVector2 UseableMax = new FPVector2()
         {
             X =
             {
@@ -497,7 +497,7 @@ namespace Thief
         /// <summary>
         ///     Gets a vector with the maximum x and y values of all the vectors. If
         ///     <paramref name="vectors" /> is <see langword="null" /> or empty, return
-        ///     <see cref="P:Thief.FPVector2.Zero" />.
+        ///     <see cref="P:Herta.FPVector2.Zero" />.
         /// </summary>
         /// <param name="vectors"></param>
         /// <returns></returns>
@@ -526,7 +526,7 @@ namespace Thief
         /// <summary>
         ///     Gets a vector with the min x and y values of all the vectors. If
         ///     <paramref name="vectors" /> is <see langword="null" /> or empty, return
-        ///     <see cref="P:Thief.FPVector2.Zero" />.
+        ///     <see cref="P:Herta.FPVector2.Zero" />.
         /// </summary>
         /// <param name="vectors"></param>
         /// <returns></returns>
@@ -563,16 +563,16 @@ namespace Thief
         ///     <remarks>
         ///         See also:
         ///         <see
-        ///             cref="M:Thief.FPVector2.Radians(Thief.FPVector2,Thief.FPVector2)" />
+        ///             cref="M:Herta.FPVector2.Radians(Herta.FPVector2,Herta.FPVector2)" />
         ///         ,
         ///         <seealso
-        ///             cref="M:Thief.FPVector2.RadiansSigned(Thief.FPVector2,Thief.FPVector2)" />
+        ///             cref="M:Herta.FPVector2.RadiansSigned(Herta.FPVector2,Herta.FPVector2)" />
         ///         ,
         ///         <seealso
-        ///             cref="M:Thief.FPVector2.RadiansSkipNormalize(Thief.FPVector2,Thief.FPVector2)" />
+        ///             cref="M:Herta.FPVector2.RadiansSkipNormalize(Herta.FPVector2,Herta.FPVector2)" />
         ///         ,
         ///         <seealso
-        ///             cref="M:Thief.FPVector2.RadiansSignedSkipNormalize(Thief.FPVector2,Thief.FPVector2)" />
+        ///             cref="M:Herta.FPVector2.RadiansSignedSkipNormalize(Herta.FPVector2,Herta.FPVector2)" />
         ///         ,
         ///     </remarks>
         /// </summary>
@@ -676,7 +676,7 @@ namespace Thief
         ///     Interpolates between <paramref name="start" /> and <paramref name="end" /> with smoothing at the limits.
         ///     Equivalent of calling
         ///     <see
-        ///         cref="M:Thief.FPMath.SmoothStep(Thief.FP,Thief.FP,Thief.FP)" />
+        ///         cref="M:Herta.FPMath.SmoothStep(Herta.FP,Herta.FP,Herta.FP)" />
         ///     for each component pair.
         /// </summary>
         /// <param name="start"></param>
@@ -688,7 +688,7 @@ namespace Thief
         /// <summary>
         ///     Equivalent of calling
         ///     <see
-        ///         cref="M:Thief.FPMath.Hermite(Thief.FP,Thief.FP,Thief.FP,Thief.FP,Thief.FP)" />
+        ///         cref="M:Herta.FPMath.Hermite(Herta.FP,Herta.FP,Herta.FP,Herta.FP,Herta.FP)" />
         ///     for each component.
         /// </summary>
         /// <param name="value1"></param>
@@ -713,7 +713,7 @@ namespace Thief
         /// <summary>
         ///     Equivalent of calling
         ///     <see
-        ///         cref="M:Thief.FPMath.Barycentric(Thief.FP,Thief.FP,Thief.FP,Thief.FP,Thief.FP)" />
+        ///         cref="M:Herta.FPMath.Barycentric(Herta.FP,Herta.FP,Herta.FP,Herta.FP,Herta.FP)" />
         ///     for each component.
         /// </summary>
         /// <param name="value1"></param>
@@ -735,7 +735,7 @@ namespace Thief
         /// <summary>
         ///     Equivalent of calling
         ///     <see
-        ///         cref="M:Thief.FPMath.CatmullRom(Thief.FP,Thief.FP,Thief.FP,Thief.FP,Thief.FP)" />
+        ///         cref="M:Herta.FPMath.CatmullRom(Herta.FP,Herta.FP,Herta.FP,Herta.FP,Herta.FP)" />
         ///     for each component.
         /// </summary>
         /// <param name="value1"></param>

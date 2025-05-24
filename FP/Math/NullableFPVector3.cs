@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     A serializable equivalent of Nullable&lt;FPVector3&gt;.
@@ -17,7 +17,7 @@ namespace Thief
         public const int SIZE = 32;
 
         /// <summary>
-        ///     If 1, then <see cref="F:Thief.NullableFPVector3._value" /> is valid.
+        ///     If 1, then <see cref="F:Herta.NullableFPVector3._value" /> is valid.
         /// </summary>
         [FieldOffset(0)] public long _hasValue;
 
@@ -31,7 +31,7 @@ namespace Thief
 
         /// <summary>Returns current value.</summary>
         /// <exception cref="T:System.NullReferenceException">
-        ///     If <see cref="P:Thief.NullableFPVector3.HasValue" />
+        ///     If <see cref="P:Herta.NullableFPVector3.HasValue" />
         ///     is <see langword="false" />
         /// </exception>
         public FPVector3 Value
@@ -45,8 +45,8 @@ namespace Thief
         }
 
         /// <summary>
-        ///     If <see cref="P:Thief.NullableFPVector3.HasValue" /> is <see langword="true" />, returns
-        ///     <see cref="P:Thief.NullableFPVector3.Value" />. Otherwise returns <paramref name="v" />.
+        ///     If <see cref="P:Herta.NullableFPVector3.HasValue" /> is <see langword="true" />, returns
+        ///     <see cref="P:Herta.NullableFPVector3.Value" />. Otherwise returns <paramref name="v" />.
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
@@ -66,10 +66,10 @@ namespace Thief
         /// <summary>Gets the hash code of the NullableFPVector3 instance.</summary>
         /// <returns>The hash code of the NullableFPVector3.</returns>
         /// <remarks>
-        ///     If <see cref="P:Thief.NullableFPVector3.HasValue" /> is <see langword="false" />, the hash code is
+        ///     If <see cref="P:Herta.NullableFPVector3.HasValue" /> is <see langword="false" />, the hash code is
         ///     always 0.
-        ///     If <see cref="P:Thief.NullableFPVector3.HasValue" /> is <see langword="true" />, the hash code is
-        ///     calculated based on the value of <see cref="P:Thief.NullableFPVector3.Value" />.
+        ///     If <see cref="P:Herta.NullableFPVector3.HasValue" /> is <see langword="true" />, the hash code is
+        ///     calculated based on the value of <see cref="P:Herta.NullableFPVector3.Value" />.
         /// </remarks>
         public override int GetHashCode() => this._hasValue == 0L ? 0 : this._value.GetHashCode();
     }

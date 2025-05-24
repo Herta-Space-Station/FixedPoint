@@ -10,7 +10,7 @@ using System.Numerics;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     public static class BitOperationsHelpers
     {

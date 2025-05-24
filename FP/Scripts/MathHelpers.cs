@@ -5,7 +5,7 @@ using System;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     internal static class MathHelpers
     {

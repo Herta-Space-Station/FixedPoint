@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>A Quaternion representing an orientation.</summary>
     /// \ingroup MathAPI
@@ -32,7 +32,7 @@ namespace Thief
         [FieldOffset(24)] public FP W;
 
         /// <summary>Quaternion corresponding to "no rotation".</summary>
-        public static FPQuaternion Identity => new FPQuaternion()
+        public static readonly FPQuaternion Identity = new FPQuaternion()
         {
             W =
             {
@@ -44,21 +44,21 @@ namespace Thief
         ///     Returns this quaternion with magnitude of 1. Most API functions expect and return normalized quaternions,
         ///     so unless components get set manually, there should not be a need to normalize quaternions
         /// </summary>
-        /// <seealso cref="M:Thief.FPQuaternion.Normalize(Thief.FPQuaternion)" />
+        /// <seealso cref="M:Herta.FPQuaternion.Normalize(Herta.FPQuaternion)" />
         public FPQuaternion Normalized => FPQuaternion.Normalize(this);
 
         /// <summary>
         ///     Creates this quaternion's inverse. If this quaternion is normalized, use
-        ///     <see cref="P:Thief.FPQuaternion.Conjugated" /> instead.
+        ///     <see cref="P:Herta.FPQuaternion.Conjugated" /> instead.
         /// </summary>
-        /// <seealso cref="M:Thief.FPQuaternion.Inverse(Thief.FPQuaternion)" />
+        /// <seealso cref="M:Herta.FPQuaternion.Inverse(Herta.FPQuaternion)" />
         public FPQuaternion Inverted => FPQuaternion.Inverse(this);
 
         /// <summary>
         ///     Creates this quaternion's conjugate. For normalized quaternions this property represents inverse rotation
-        ///     and should be used instead of <see cref="P:Thief.FPQuaternion.Inverted" />
+        ///     and should be used instead of <see cref="P:Herta.FPQuaternion.Inverted" />
         /// </summary>
-        /// <seealso cref="M:Thief.FPQuaternion.Conjugate(Thief.FPQuaternion)" />
+        /// <seealso cref="M:Herta.FPQuaternion.Conjugate(Herta.FPQuaternion)" />
         public FPQuaternion Conjugated => FPQuaternion.Conjugate(this);
 
         private long MagnitudeSqrRaw => (this.X.RawValue * this.X.RawValue + 32768L >> 16) + (this.Y.RawValue * this.Y.RawValue + 32768L >> 16) + (this.Z.RawValue * this.Z.RawValue + 32768L >> 16) + (this.W.RawValue * this.W.RawValue + 32768L >> 16);
@@ -102,7 +102,7 @@ namespace Thief
 
         /// <summary>
         ///     Creates product of two quaternions. Can be used to combine two rotations. Just like
-        ///     in the case of <see cref="T:Thief.FPMatrix4x4" /> the righmost operand gets applied first.
+        ///     in the case of <see cref="T:Herta.FPMatrix4x4" /> the righmost operand gets applied first.
         ///     This method computes the equivalent to the following pseduo-code:
         ///     <code>
         /// FPQuaternion result;
@@ -186,7 +186,7 @@ namespace Thief
         ///     internally).
         ///     If these vectors are known to be normalized or have magnitude close to 1,
         ///     <see
-        ///         cref="M:Thief.FPQuaternion.FromToRotationSkipNormalize(Thief.FPVector3,Thief.FPVector3)" />
+        ///         cref="M:Herta.FPQuaternion.FromToRotationSkipNormalize(Herta.FPVector3,Herta.FPVector3)" />
         ///     can be used for better performance.
         /// </summary>
         /// <param name="fromVector"></param>
@@ -221,7 +221,7 @@ namespace Thief
         ///     normalized internally).
         ///     If these vectors are known to be normalized or have magnitude close to 1, use
         ///     <see
-        ///         cref="M:Thief.FPQuaternion.FromToRotation(Thief.FPVector3,Thief.FPVector3)" />
+        ///         cref="M:Herta.FPQuaternion.FromToRotation(Herta.FPVector3,Herta.FPVector3)" />
         ///     instead.
         /// </summary>
         /// <param name="fromVector"></param>
@@ -386,7 +386,7 @@ namespace Thief
 
         /// <summary>
         ///     Creates a rotation with the specified <paramref name="forward" /> direction and
-        ///     <see cref="P:Thief.FPVector3.Up" />.
+        ///     <see cref="P:Herta.FPVector3.Up" />.
         /// </summary>
         /// <param name="forward"></param>
         /// <returns></returns>
@@ -480,7 +480,7 @@ namespace Thief
         ///     Spherically interpolates between <paramref name="from" /> and <paramref name="to" /> by <paramref name="t" /> and
         ///     normalizes the result afterwards. <paramref name="t" /> is clamped to the range [0, 1].
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <param name="t"></param>
@@ -499,7 +499,7 @@ namespace Thief
         ///     Spherically interpolates between <paramref name="from" /> and <paramref name="to" /> by <paramref name="t" /> and
         ///     normalizes the result afterwards.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <param name="t"></param>
@@ -636,7 +636,7 @@ namespace Thief
         /// <summary>
         ///     Creates a rotation which rotates <paramref name="angle" /> degrees around <paramref name="axis" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="angle"></param>
         /// <param name="axis"></param>
         /// <returns></returns>
@@ -659,7 +659,7 @@ namespace Thief
         /// <summary>
         ///     Creates a rotation which rotates <paramref name="radians" /> radians around <paramref name="axis" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="radians"></param>
         /// <param name="axis"></param>
         /// <returns></returns>
@@ -682,10 +682,10 @@ namespace Thief
         /// <summary>
         ///     Returns the Inverse of rotation <paramref name="value" />. If <paramref name="value" /> is normalized it
         ///     will be faster to call
-        ///     <see cref="M:Thief.FPQuaternion.Conjugate(Thief.FPQuaternion)" />. If
+        ///     <see cref="M:Herta.FPQuaternion.Conjugate(Herta.FPQuaternion)" />. If
         ///     <paramref name="value" />
         ///     has a magnitude close to 0, <paramref name="value" /> will be returned.
-        ///     <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        ///     <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -706,7 +706,7 @@ namespace Thief
         /// <summary>
         ///     Converts this quaternion <paramref name="value" /> to one with the same orientation but with a magnitude of 1. If
         ///     <paramref name="value" />
-        ///     has a magnitude close to 0, <see cref="P:Thief.FPQuaternion.Identity" /> is returned.
+        ///     has a magnitude close to 0, <see cref="P:Herta.FPQuaternion.Identity" /> is returned.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -783,7 +783,7 @@ namespace Thief
         ///     Computes product of two quaternions. Fully equivalent to Unity's Quaternion multiplication.
         ///     See
         ///     <see
-        ///         cref="M:Thief.FPQuaternion.Product(Thief.FPQuaternion,Thief.FPQuaternion)" />
+        ///         cref="M:Herta.FPQuaternion.Product(Herta.FPQuaternion,Herta.FPQuaternion)" />
         ///     for details.
         /// </summary>
         /// <param name="left"></param>

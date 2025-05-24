@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>A serializable equivalent of Nullable&lt;FP&gt;.</summary>
     /// \ingroup MathAPI
@@ -15,7 +15,7 @@ namespace Thief
         public const int SIZE = 16;
 
         /// <summary>
-        ///     If 1, then <see cref="F:Thief.NullableFP._value" /> is valid.
+        ///     If 1, then <see cref="F:Herta.NullableFP._value" /> is valid.
         /// </summary>
         [FieldOffset(0)] public long _hasValue;
 
@@ -29,7 +29,7 @@ namespace Thief
 
         /// <summary>Returns current value.</summary>
         /// <exception cref="T:System.NullReferenceException">
-        ///     If <see cref="P:Thief.NullableFP.HasValue" /> is
+        ///     If <see cref="P:Herta.NullableFP.HasValue" /> is
         ///     <see langword="false" />
         /// </exception>
         public FP Value
@@ -43,8 +43,8 @@ namespace Thief
         }
 
         /// <summary>
-        ///     If <see cref="P:Thief.NullableFP.HasValue" /> is <see langword="true" />, returns
-        ///     <see cref="P:Thief.NullableFP.Value" />. Otherwise returns <paramref name="v" />.
+        ///     If <see cref="P:Herta.NullableFP.HasValue" /> is <see langword="true" />, returns
+        ///     <see cref="P:Herta.NullableFP.Value" />. Otherwise returns <paramref name="v" />.
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>

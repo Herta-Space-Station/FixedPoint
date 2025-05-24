@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     Represents 3x3 column major matrix.
@@ -51,12 +51,12 @@ namespace Thief
         [FieldOffset(64)] public FP M22;
 
         /// <summary>Matrix with 0s in every cell.</summary>
-        public static FPMatrix3x3 Zero => new FPMatrix3x3();
+        public static readonly FPMatrix3x3 Zero = new FPMatrix3x3();
 
         /// <summary>
         ///     Matrix with 1s in the main diagonal and 0s in all other cells.
         /// </summary>
-        public static FPMatrix3x3 Identity => new FPMatrix3x3()
+        public static readonly FPMatrix3x3 Identity = new FPMatrix3x3()
         {
             M00 =
             {
@@ -252,7 +252,7 @@ namespace Thief
 
         /// <summary>
         ///     Returns <see langword="true" /> if this matrix is equal to the
-        ///     <see cref="P:Thief.FPMatrix3x3.Identity" /> matrix
+        ///     <see cref="P:Herta.FPMatrix3x3.Identity" /> matrix
         /// </summary>
         public bool IsIdentity => this.M00.RawValue == 65536L && this.M11.RawValue == 65536L && this.M22.RawValue == 65536L && (this.M01.RawValue | this.M02.RawValue | this.M10.RawValue | this.M12.RawValue | this.M20.RawValue | this.M21.RawValue) == 0L;
 
@@ -360,7 +360,7 @@ namespace Thief
 
         /// <summary>
         ///     Creates inverted matrix. Matrix with determinant 0 can not be inverted and result with
-        ///     <see cref="P:Thief.FPMatrix3x3.Zero" />.
+        ///     <see cref="P:Herta.FPMatrix3x3.Zero" />.
         /// </summary>
         public FPMatrix3x3 Inverted
         {

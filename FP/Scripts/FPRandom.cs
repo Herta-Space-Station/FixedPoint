@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>Represents a deterministic pseudo-random number generator with high performance.</summary>
     /// <remarks>Uses xoshiro256** algorithm for random number generation.</remarks>
