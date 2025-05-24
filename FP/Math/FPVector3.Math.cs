@@ -2,7 +2,7 @@
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>Represents a plane in three-dimensional space.</summary>
     /// <remarks>

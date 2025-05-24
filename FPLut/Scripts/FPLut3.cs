@@ -2,7 +2,7 @@
 
 using System;
 
-namespace Thief
+namespace Herta
 {
     public static partial class FPLut
     {

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>A collection of collision helper functions.</summary>
     /// \ingroup MathAPI

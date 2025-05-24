@@ -5,7 +5,7 @@
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     Represents a high precision divisor for use with the Fixed Point math system.
@@ -18,7 +18,9 @@ namespace Thief
         /// <summary>The total precision.</summary>
         public const int TotalPrecision = 32;
 
+#pragma warning disable CS0649
         internal long RawValue;
+#pragma warning disable CS0649
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static FPHighPrecisionDivisor Cast(in long value) => Unsafe.As<long, FPHighPrecisionDivisor>(ref Unsafe.AsRef(in value));
@@ -258,7 +260,7 @@ namespace Thief
         public static readonly FPHighPrecisionDivisor Log2_10 = Cast(14267572527L);
 
         /// <summary>
-        ///     Returns the value of the divisor as a <see cref="T:Thief.FP" />.
+        ///     Returns the value of the divisor as a <see cref="T:Herta.FP" />.
         /// </summary>
         public FP AsFP => FP.FromRaw(this.RawValue >> 16);
 
@@ -282,7 +284,7 @@ namespace Thief
         }
 
         /// <summary>
-        ///     Holds <see cref="T:Thief.FPHighPrecisionDivisor" /> constants in raw (long) form.
+        ///     Holds <see cref="T:Herta.FPHighPrecisionDivisor" /> constants in raw (long) form.
         /// </summary>
         public static class Raw
         {

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     Represents a two-dimensional vector with integer components.
@@ -26,32 +26,32 @@ namespace Thief
         [FieldOffset(4)] public int Y;
 
         /// <summary>A vector with components (0,0);</summary>
-        public static IntVector2 Zero => new IntVector2(0, 0);
+        public static readonly IntVector2 Zero = new IntVector2(0, 0);
 
         /// <summary>A vector with components (1,1);</summary>
-        public static IntVector2 One => new IntVector2(1, 1);
+        public static readonly IntVector2 One = new IntVector2(1, 1);
 
         /// <summary>A vector with components (1,0);</summary>
-        public static IntVector2 Right => new IntVector2(1, 0);
+        public static readonly IntVector2 Right = new IntVector2(1, 0);
 
         /// <summary>A vector with components (-1,0);</summary>
-        public static IntVector2 Left => new IntVector2(-1, 0);
+        public static readonly IntVector2 Left = new IntVector2(-1, 0);
 
         /// <summary>A vector with components (0,1);</summary>
-        public static IntVector2 Up => new IntVector2(0, 1);
+        public static readonly IntVector2 Up = new IntVector2(0, 1);
 
         /// <summary>A vector with components (0,-1);</summary>
-        public static IntVector2 Down => new IntVector2(0, -1);
+        public static readonly IntVector2 Down = new IntVector2(0, -1);
 
         /// <summary>
         ///     A vector with components (int.MaxValue, int.MaxValue);
         /// </summary>
-        public static IntVector2 MaxValue => new IntVector2(int.MaxValue, int.MaxValue);
+        public static readonly IntVector2 MaxValue = new IntVector2(int.MaxValue, int.MaxValue);
 
         /// <summary>
         ///     A vector with components (int.MinValue, int.MinValue);
         /// </summary>
-        public static IntVector2 MinValue => new IntVector2(int.MinValue, int.MinValue);
+        public static readonly IntVector2 MinValue = new IntVector2(int.MinValue, int.MinValue);
 
         /// <summary>Initializes a new instance of the IntVector2 struct.</summary>
         /// <param name="x">The x-coordinate of the vector.</param>

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>Represents a 3D Vector</summary>
     /// \ingroup MathAPI
@@ -28,7 +28,7 @@ namespace Thief
 
         /// <summary>
         ///     Normalizes the given vector. If the vector is too short to normalize,
-        ///     <see cref="P:Thief.FPVector3.Zero" /> will be returned.
+        ///     <see cref="P:Herta.FPVector3.Zero" /> will be returned.
         /// </summary>
         /// <param name="value">The vector which should be normalized.</param>
         /// <returns>A normalized vector.</returns>
@@ -47,7 +47,7 @@ namespace Thief
 
         /// <summary>
         ///     Normalizes the given vector. If the vector is too short to normalize,
-        ///     <see cref="P:Thief.FPVector3.Zero" /> will be returned.
+        ///     <see cref="P:Herta.FPVector3.Zero" /> will be returned.
         /// </summary>
         /// <param name="value">The vector which should be normalized.</param>
         /// <param name="magnitude">The original vector's magnitude.</param>
@@ -72,10 +72,10 @@ namespace Thief
         }
 
         /// <summary>A vector with components (0,0,0);</summary>
-        public static FPVector3 Zero => new FPVector3();
+        public static readonly FPVector3 Zero = new FPVector3();
 
         /// <summary>A vector with components (-1,0,0);</summary>
-        public static FPVector3 Left => new FPVector3()
+        public static readonly FPVector3 Left = new FPVector3()
         {
             X =
             {
@@ -84,7 +84,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (1,0,0);</summary>
-        public static FPVector3 Right => new FPVector3()
+        public static readonly FPVector3 Right = new FPVector3()
         {
             X =
             {
@@ -93,7 +93,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (0,1,0);</summary>
-        public static FPVector3 Up => new FPVector3()
+        public static readonly FPVector3 Up = new FPVector3()
         {
             Y =
             {
@@ -102,7 +102,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (0,-1,0);</summary>
-        public static FPVector3 Down => new FPVector3()
+        public static readonly FPVector3 Down = new FPVector3()
         {
             Y =
             {
@@ -111,7 +111,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (0,0,-1);</summary>
-        public static FPVector3 Back => new FPVector3()
+        public static readonly FPVector3 Back = new FPVector3()
         {
             Z =
             {
@@ -120,7 +120,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (0,0,1);</summary>
-        public static FPVector3 Forward => new FPVector3()
+        public static readonly FPVector3 Forward = new FPVector3()
         {
             Z =
             {
@@ -129,7 +129,7 @@ namespace Thief
         };
 
         /// <summary>A vector with components (1,1,1);</summary>
-        public static FPVector3 One => new FPVector3()
+        public static readonly FPVector3 One = new FPVector3()
         {
             X =
             {
@@ -149,7 +149,7 @@ namespace Thief
         ///     A vector with components
         ///     (FP.MinValue,FP.MinValue,FP.MinValue);
         /// </summary>
-        public static FPVector3 MinValue => new FPVector3()
+        public static readonly FPVector3 MinValue = new FPVector3()
         {
             X =
             {
@@ -169,7 +169,7 @@ namespace Thief
         ///     A vector with components
         ///     (FP.MaxValue,FP.MaxValue,FP.MaxValue);
         /// </summary>
-        public static FPVector3 MaxValue => new FPVector3()
+        public static readonly FPVector3 MaxValue = new FPVector3()
         {
             X =
             {
@@ -189,7 +189,7 @@ namespace Thief
         ///     A vector with components
         ///     (FP.UseableMin,FP.UseableMin,FP.UseableMin);
         /// </summary>
-        public static FPVector3 UseableMin => new FPVector3()
+        public static readonly FPVector3 UseableMin = new FPVector3()
         {
             X =
             {
@@ -209,7 +209,7 @@ namespace Thief
         ///     A vector with components
         ///     (FP.UseableMax,FP.UseableMax,FP.UseableMax);
         /// </summary>
-        public static FPVector3 UseableMax => new FPVector3()
+        public static readonly FPVector3 UseableMax = new FPVector3()
         {
             X =
             {

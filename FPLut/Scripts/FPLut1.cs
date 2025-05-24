@@ -1,6 +1,6 @@
 ﻿// ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     The lookup table for the inverse cosine function.

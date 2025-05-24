@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>Represents an 2D axis aligned bounding box (AABB).</summary>
     /// \ingroup MathAPI
@@ -25,8 +25,8 @@ namespace Thief
 
         /// <summary>
         ///     Gets or sets the maximal point of the box. This is always equal to
-        ///     <see cref="F:Thief.FPBounds2.Center" /> + <see cref="F:Thief.FPBounds2.Extents" />.
-        ///     Setting this property will not affect <see cref="P:Thief.FPBounds2.Min" />.
+        ///     <see cref="F:Herta.FPBounds2.Center" /> + <see cref="F:Herta.FPBounds2.Extents" />.
+        ///     Setting this property will not affect <see cref="P:Herta.FPBounds2.Min" />.
         /// </summary>
         public FPVector2 Max
         {
@@ -36,8 +36,8 @@ namespace Thief
 
         /// <summary>
         ///     Gets or sets the minimal point of the box. This is always equal to
-        ///     <see cref="F:Thief.FPBounds2.Center" /> - <see cref="F:Thief.FPBounds2.Extents" />.
-        ///     Setting this property will not affect <see cref="P:Thief.FPBounds2.Max" />.
+        ///     <see cref="F:Herta.FPBounds2.Center" /> - <see cref="F:Herta.FPBounds2.Extents" />.
+        ///     Setting this property will not affect <see cref="P:Herta.FPBounds2.Max" />.
         /// </summary>
         public FPVector2 Min
         {

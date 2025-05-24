@@ -10,7 +10,7 @@ using System.Text;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     A fixed-point number. 16 lower bits are used for the decimal part, 48 for the integral part.
@@ -22,8 +22,8 @@ namespace Thief
     ///         However, a majority of internal code and the multiplication operator perform fast multiplication,
     ///         where the result can use at most 32 bits for the integral part and overflows are not detected.
     ///         This means that you should stay in <see cref="T:System.Int16" /> range.
-    ///         <seealso cref="P:Thief.FP.UseableMax" />
-    ///         <seealso cref="P:Thief.FP.UseableMin" />
+    ///         <seealso cref="P:Herta.FP.UseableMax" />
+    ///         <seealso cref="P:Herta.FP.UseableMin" />
     ///     </para>
     /// </summary>
     /// \ingroup MathAPI
@@ -39,7 +39,7 @@ namespace Thief
     ///     The MulShift constant is equal to the precision value.
     ///     The MulShiftTrunc constant is equal to the precision value.
     /// </remarks>
-    /// <seealso cref="T:Thief.FPLut" />
+    /// <seealso cref="T:Herta.FPLut" />
     [Serializable]
     [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct FP : IEquatable<FP>, IComparable<FP>
@@ -58,7 +58,7 @@ namespace Thief
         public const long RAW_ONE = 65536;
 
         /// <summary>
-        ///     Represents a constant that holds the raw value of zero for the <see cref="T:Thief.FP" /> struct.
+        ///     Represents a constant that holds the raw value of zero for the <see cref="T:Herta.FP" /> struct.
         /// </summary>
         public const long RAW_ZERO = 0;
 
@@ -98,15 +98,15 @@ namespace Thief
         public static readonly FP SmallestNonZero = Cast(1L);
 
         /// <summary>
-        ///     Minimum FP value, but values outside of <see cref="P:Thief.FP.UseableMin" /> and
-        ///     <see cref="P:Thief.FP.UseableMax" /> (inclusive) can overflow when multiplied.
+        ///     Minimum FP value, but values outside of <see cref="P:Herta.FP.UseableMin" /> and
+        ///     <see cref="P:Herta.FP.UseableMax" /> (inclusive) can overflow when multiplied.
         ///     <para>Closest double: -140737488355328</para>
         /// </summary>
         public static readonly FP MinValue = Cast(long.MinValue);
 
         /// <summary>
-        ///     Maximum FP value, but values outside of <see cref="P:Thief.FP.UseableMin" /> and
-        ///     <see cref="P:Thief.FP.UseableMax" /> (inclusive) can overflow when multiplied.
+        ///     Maximum FP value, but values outside of <see cref="P:Herta.FP.UseableMin" /> and
+        ///     <see cref="P:Herta.FP.UseableMax" /> (inclusive) can overflow when multiplied.
         ///     <para>Closest double: 140737488355328</para>
         /// </summary>
         public static readonly FP MaxValue = Cast(long.MaxValue);
@@ -116,22 +116,14 @@ namespace Thief
         ///     long range).
         ///     <para>Closest double: -32768</para>
         /// </summary>
-        public static FP UseableMin
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast((long)int.MinValue);
-        }
+        public static readonly FP UseableMin = Cast((long)int.MinValue);
 
         /// <summary>
         ///     Represents the highest FP number that can be multiplied with itself and not cause an overflow (exceeding long
         ///     range).
         ///     <para>Closest double: 32767.9999847412</para>
         /// </summary>
-        public static FP UseableMax
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Cast((long)int.MaxValue);
-        }
+        public static readonly FP UseableMax = Cast((long)int.MaxValue);
 
         /// <summary>
         ///     Pi number.
@@ -512,7 +504,7 @@ namespace Thief
         public static readonly FP EN5 = Cast(1L);
 
         /// <summary>
-        ///     FP constant representing Epsilon <see cref="P:Thief.FP.EN3" />.
+        ///     FP constant representing Epsilon <see cref="P:Herta.FP.EN3" />.
         ///     <para>Closest double: 0.001007080078125</para>
         /// </summary>
         public static readonly FP Epsilon = Cast(66L);
@@ -677,13 +669,13 @@ namespace Thief
         public string ToStringLegacy() => this.AsFloat.ToString((IFormatProvider)CultureInfo.InvariantCulture);
 
         /// <summary>
-        ///     Returns a string that represents the <see cref="T:Thief.FP" />.
+        ///     Returns a string that represents the <see cref="T:Herta.FP" />.
         /// </summary>
         /// <returns>String representation of the FP.</returns>
         public string ToString(string format) => this.AsDouble.ToString(format, (IFormatProvider)CultureInfo.InvariantCulture);
 
         /// <summary>
-        ///     Returns a string that represents the <see cref="T:Thief.FP" /> using a custom format.
+        ///     Returns a string that represents the <see cref="T:Herta.FP" /> using a custom format.
         /// </summary>
         /// <returns>String representation of the FP.</returns>
         public string ToStringInternal()
@@ -703,7 +695,7 @@ namespace Thief
         /// <summary>
         ///     Converts a double value to an instance of the FP, with rounding towards zero..
         ///     To round towards nearest representable FP, use
-        ///     <see cref="M:Thief.FP.FromRoundedDouble_UNSAFE(System.Double)" />.
+        ///     <see cref="M:Herta.FP.FromRoundedDouble_UNSAFE(System.Double)" />.
         ///     This method is marked as unsafe because it is not deterministic.
         /// </summary>
         /// <param name="value">The double value to convert.</param>
@@ -756,7 +748,7 @@ namespace Thief
         /// <summary>
         ///     Converts a single-precision floating-point value to an instance of the FP, with rounding towards zero..
         ///     To round towards nearest representable FP, use
-        ///     <see cref="M:Thief.FP.FromRoundedFloat_UNSAFE(System.Single)" />.
+        ///     <see cref="M:Herta.FP.FromRoundedFloat_UNSAFE(System.Single)" />.
         ///     This method is marked as unsafe because it is not deterministic.
         /// </summary>
         /// <param name="value">The value to convert.</param>
@@ -1042,7 +1034,6 @@ namespace Thief
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FP operator +(FP a)
         {
-            a.RawValue = a.RawValue;
             return a;
         }
 
@@ -1509,7 +1500,7 @@ namespace Thief
         public static implicit operator FP(double value) => FromDouble_SAFE(value);
 
         /// <summary>
-        ///     Holds <see cref="T:Thief.FP" /> constants in raw (long) form.
+        ///     Holds <see cref="T:Herta.FP" /> constants in raw (long) form.
         /// </summary>
         public static class Raw
         {
@@ -1520,15 +1511,15 @@ namespace Thief
             public const long SmallestNonZero = 1;
 
             /// <summary>
-            ///     Minimum FP value, but values outside of <see cref="F:Thief.FP.Raw.UseableMin" /> and
-            ///     <see cref="F:Thief.FP.Raw.UseableMax" /> (inclusive) can overflow when multiplied.
+            ///     Minimum FP value, but values outside of <see cref="F:Herta.FP.Raw.UseableMin" /> and
+            ///     <see cref="F:Herta.FP.Raw.UseableMax" /> (inclusive) can overflow when multiplied.
             ///     <para>Closest double: -140737488355328</para>
             /// </summary>
             public const long MinValue = -9223372036854775808;
 
             /// <summary>
-            ///     Maximum FP value, but values outside of <see cref="F:Thief.FP.Raw.UseableMin" /> and
-            ///     <see cref="F:Thief.FP.Raw.UseableMax" /> (inclusive) can overflow when multiplied.
+            ///     Maximum FP value, but values outside of <see cref="F:Herta.FP.Raw.UseableMin" /> and
+            ///     <see cref="F:Herta.FP.Raw.UseableMax" /> (inclusive) can overflow when multiplied.
             ///     <para>Closest double: 140737488355328</para>
             /// </summary>
             public const long MaxValue = 9223372036854775807;
@@ -1926,7 +1917,7 @@ namespace Thief
             public const long EN5 = 1;
 
             /// <summary>
-            ///     FP constant representing Epsilon <see cref="F:Thief.FP.Raw.EN3" />.
+            ///     FP constant representing Epsilon <see cref="F:Herta.FP.Raw.EN3" />.
             ///     <para>Closest double: 0.001007080078125</para>
             /// </summary>
             public const long Epsilon = 66;
@@ -1951,7 +1942,7 @@ namespace Thief
         }
 
         /// <summary>
-        ///     Compares <see cref="T:Thief.FP" />s.
+        ///     Compares <see cref="T:Herta.FP" />s.
         /// </summary>
         public class Comparer : System.Collections.Generic.Comparer<FP>
         {
@@ -1978,7 +1969,7 @@ namespace Thief
         }
 
         /// <summary>
-        ///     Equality comparer for <see cref="T:Thief.FP" />s.
+        ///     Equality comparer for <see cref="T:Herta.FP" />s.
         /// </summary>
         public class EqualityComparer : IEqualityComparer<FP>
         {

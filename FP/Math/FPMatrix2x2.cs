@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     Represents 2x2 column major matrix, which can be used for 2D scaling and rotation.
@@ -42,12 +42,12 @@ namespace Thief
         [FieldOffset(24)] public FP M11;
 
         /// <summary>Matrix with 0s in every cell.</summary>
-        public static FPMatrix2x2 Zero => new FPMatrix2x2();
+        public static readonly FPMatrix2x2 Zero = new FPMatrix2x2();
 
         /// <summary>
         ///     Matrix with 1s in the main diagonal and 0s in all other cells.
         /// </summary>
-        public static FPMatrix2x2 Identity => new FPMatrix2x2()
+        public static readonly FPMatrix2x2 Identity = new FPMatrix2x2()
         {
             M00 =
             {
@@ -124,7 +124,7 @@ namespace Thief
 
         /// <summary>
         ///     Returns <see langword="true" /> if this matrix is equal to the
-        ///     <see cref="P:Thief.FPMatrix2x2.Identity" /> matrix
+        ///     <see cref="P:Herta.FPMatrix2x2.Identity" /> matrix
         /// </summary>
         public bool IsIdentity => this.M00.RawValue == 65536L && this.M11.RawValue == 65536L && (this.M01.RawValue | this.M10.RawValue) == 0L;
 
@@ -260,7 +260,7 @@ namespace Thief
 
         /// <summary>
         ///     Creates inverted matrix. Matrix with determinant 0 can not be inverted and result with
-        ///     <see cref="P:Thief.FPMatrix2x2.Zero" />.
+        ///     <see cref="P:Herta.FPMatrix2x2.Zero" />.
         /// </summary>
         public FPMatrix2x2 Inverted
         {

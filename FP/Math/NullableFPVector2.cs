@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     A serializable equivalent of Nullable&lt;FPVector2&gt;.
@@ -17,7 +17,7 @@ namespace Thief
         public const int SIZE = 24;
 
         /// <summary>
-        ///     If 1, then <see cref="F:Thief.NullableFPVector2._value" /> is valid.
+        ///     If 1, then <see cref="F:Herta.NullableFPVector2._value" /> is valid.
         /// </summary>
         [FieldOffset(0)] public long _hasValue;
 
@@ -31,7 +31,7 @@ namespace Thief
 
         /// <summary>Returns current value.</summary>
         /// <exception cref="T:System.NullReferenceException">
-        ///     If <see cref="P:Thief.NullableFPVector2.HasValue" />
+        ///     If <see cref="P:Herta.NullableFPVector2.HasValue" />
         ///     is <see langword="false" />
         /// </exception>
         public FPVector2 Value
@@ -45,8 +45,8 @@ namespace Thief
         }
 
         /// <summary>
-        ///     If <see cref="P:Thief.NullableFPVector2.HasValue" /> is <see langword="true" />, returns
-        ///     <see cref="P:Thief.NullableFPVector2.Value" />. Otherwise returns <paramref name="v" />.
+        ///     If <see cref="P:Herta.NullableFPVector2.HasValue" /> is <see langword="true" />, returns
+        ///     <see cref="P:Herta.NullableFPVector2.Value" />. Otherwise returns <paramref name="v" />.
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>

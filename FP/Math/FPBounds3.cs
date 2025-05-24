@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>Represents an 3D axis aligned bounding box (AABB).</summary>
     /// \ingroup MathAPI
@@ -28,8 +28,8 @@ namespace Thief
 
         /// <summary>
         ///     Gets or sets the maximal point of the box. This is always equal to
-        ///     <see cref="F:Thief.FPBounds3.Center" /> + <see cref="F:Thief.FPBounds3.Extents" />.
-        ///     Setting this property will not affect <see cref="P:Thief.FPBounds3.Min" />.
+        ///     <see cref="F:Herta.FPBounds3.Center" /> + <see cref="F:Herta.FPBounds3.Extents" />.
+        ///     Setting this property will not affect <see cref="P:Herta.FPBounds3.Min" />.
         /// </summary>
         public FPVector3 Max
         {
@@ -39,8 +39,8 @@ namespace Thief
 
         /// <summary>
         ///     Gets or sets the minimal point of the box. This is always equal to
-        ///     <see cref="F:Thief.FPBounds3.Center" /> - <see cref="F:Thief.FPBounds3.Extents" />.
-        ///     Setting this property will not affect <see cref="P:Thief.FPBounds3.Max" />.
+        ///     <see cref="F:Herta.FPBounds3.Center" /> - <see cref="F:Herta.FPBounds3.Extents" />.
+        ///     Setting this property will not affect <see cref="P:Herta.FPBounds3.Max" />.
         /// </summary>
         public FPVector3 Min
         {
@@ -119,11 +119,11 @@ namespace Thief
         }
 
         /// <summary>
-        ///     Computes a hash code for the current instance of the <see cref="T:Thief.FPBounds3" /> class.
+        ///     Computes a hash code for the current instance of the <see cref="T:Herta.FPBounds3" /> class.
         /// </summary>
         /// <remarks>
-        ///     The hash code is computed by combining the hash codes of the <see cref="F:Thief.FPBounds3.Center" />
-        ///     and <see cref="F:Thief.FPBounds3.Extents" />.
+        ///     The hash code is computed by combining the hash codes of the <see cref="F:Herta.FPBounds3.Center" />
+        ///     and <see cref="F:Herta.FPBounds3.Extents" />.
         /// </remarks>
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode() => (17 * 31 + this.Center.GetHashCode()) * 31 + this.Extents.GetHashCode();

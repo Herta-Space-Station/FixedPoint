@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     Represents a three-dimensional vector with integer components.
@@ -41,42 +41,42 @@ namespace Thief
         /// <summary>
         ///     A vector with the components (int.MaxValue, int.MaxValue, int.MaxValue).
         /// </summary>
-        public static IntVector3 MaxValue => new IntVector3(int.MaxValue, int.MaxValue, int.MaxValue);
+        public static readonly IntVector3 MaxValue = new IntVector3(int.MaxValue, int.MaxValue, int.MaxValue);
 
         /// <summary>
         ///     A vector with the components (int.MinValue, int.MinValue, int.MinValue).
         /// </summary>
-        public static IntVector3 MinValue => new IntVector3(int.MinValue, int.MinValue, int.MinValue);
+        public static readonly IntVector3 MinValue = new IntVector3(int.MinValue, int.MinValue, int.MinValue);
 
         /// <summary>
         ///     Represents an upward vector with x = 0, y = 1, and z = 0.
         /// </summary>
-        public static IntVector3 Up => new IntVector3(0, 1, 0);
+        public static readonly IntVector3 Up = new IntVector3(0, 1, 0);
 
         /// <summary>
         ///     Represents the downward direction with coordinates (0, -1, 0).
         /// </summary>
-        public static IntVector3 Down => new IntVector3(0, -1, 0);
+        public static readonly IntVector3 Down = new IntVector3(0, -1, 0);
 
         /// <summary>
         ///     Represents a 3-dimensional vector with integer components.
         /// </summary>
         /// <remarks>
-        ///     This struct is part of the <see cref="N:Thief" /> namespace.
+        ///     This struct is part of the <see cref="N:Herta" /> namespace.
         /// </remarks>
-        public static IntVector3 Left => new IntVector3(-1, 0, 0);
+        public static readonly IntVector3 Left = new IntVector3(-1, 0, 0);
 
         /// <summary>The right direction vector (1, 0, 0).</summary>
         /// <value>The right direction vector.</value>
-        public static IntVector3 Right => new IntVector3(1, 0, 0);
+        public static readonly IntVector3 Right = new IntVector3(1, 0, 0);
 
         /// <summary>The vector representing a coordinate of (1, 1, 1).</summary>
-        public static IntVector3 One => new IntVector3(1, 1, 1);
+        public static readonly IntVector3 One = new IntVector3(1, 1, 1);
 
         /// <summary>
         ///     Represents a zero vector with all components set to 0.
         /// </summary>
-        public static IntVector3 Zero => new IntVector3(0, 0, 0);
+        public static readonly IntVector3 Zero = new IntVector3(0, 0, 0);
 
         /// <summary>Returns a hash code for the vector.</summary>
         public override int GetHashCode() => HashCode.Combine<int, int, int>(this.X, this.Y, this.Z);
@@ -268,7 +268,7 @@ namespace Thief
         /// </summary>
         public bool Equals(IntVector3 other) => this.X == other.X && this.Y == other.Y && this.Z == other.Z;
 
-        /// <inheritdoc cref="M:Thief.IntVector3.Equals(Thief.IntVector3)" />
+        /// <inheritdoc cref="M:Herta.IntVector3.Equals(Herta.IntVector3)" />
         public override bool Equals(object? obj) => obj is IntVector3 other && this.Equals(other);
 
         public IntVector3 XXX

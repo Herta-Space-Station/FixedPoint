@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>A collection of common math functions.</summary>
     /// \ingroup MathAPI
@@ -108,7 +108,7 @@ namespace Thief
             return value;
         }
 
-        /// <inheritdoc cref="M:Thief.FPMath.Floor(Thief.FP)" />
+        /// <inheritdoc cref="M:Herta.FPMath.Floor(Herta.FP)" />
         public static long FloorRaw(long value) => value & -65536L;
 
         /// <summary>
@@ -275,8 +275,8 @@ namespace Thief
         }
 
         /// <summary>
-        ///     Clamps the given value between <see cref="P:Thief.FP.UseableMin" /> and
-        ///     <see cref="P:Thief.FP.UseableMax" />.
+        ///     Clamps the given value between <see cref="P:Herta.FP.UseableMin" /> and
+        ///     <see cref="P:Herta.FP.UseableMax" />.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -426,7 +426,7 @@ namespace Thief
         ///     Interpolates between <paramref name="start" /> and <paramref name="end" /> with smoothing at the limits.
         ///     Equivalent of calling
         ///     <see
-        ///         cref="M:Thief.FPMath.Hermite(Thief.FP,Thief.FP,Thief.FP,Thief.FP,Thief.FP)" />
+        ///         cref="M:Herta.FPMath.Hermite(Herta.FP,Herta.FP,Herta.FP,Herta.FP,Herta.FP)" />
         ///     with tangents set to 0 and clamping <paramref name="t" /> between 0 and 1.
         /// </summary>
         /// <param name="start"></param>
@@ -438,7 +438,7 @@ namespace Thief
         /// <summary>
         ///     Returns square root of <paramref name="value" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="value" /> is less than 0</exception>
@@ -580,8 +580,8 @@ namespace Thief
         /// <param name="n">Divisor</param>
         /// <returns>Remainder after division</returns>
         /// <exception cref="T:System.InvalidOperationException">
-        ///     When n &gt; <see cref="P:Thief.FP.UseableMax" /> or
-        ///     n &lt; <see cref="P:Thief.FP.UseableMin" />
+        ///     When n &gt; <see cref="P:Herta.FP.UseableMax" /> or
+        ///     n &lt; <see cref="P:Herta.FP.UseableMin" />
         /// </exception>
         /// <exception cref="T:System.DivideByZeroException">When n == 0</exception>
         public static FP ModuloClamped(FP a, FP n)
@@ -641,10 +641,10 @@ namespace Thief
 
         /// <summary>
         ///     Returns floor of the logarithm of <paramref name="value" /> in base 2. It is much
-        ///     faster than calling <see cref="M:Thief.FPMath.Log2(Thief.FP)" /> and then
-        ///     <see cref="M:Thief.FPMath.FloorToInt(Thief.FP)" />
+        ///     faster than calling <see cref="M:Herta.FPMath.Log2(Herta.FP)" /> and then
+        ///     <see cref="M:Herta.FPMath.FloorToInt(Herta.FP)" />
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -652,10 +652,10 @@ namespace Thief
 
         /// <summary>
         ///     Returns celining of the logarithm of <paramref name="value" /> in base 2. It is much
-        ///     faster than calling <see cref="M:Thief.FPMath.Log2(Thief.FP)" /> and then
-        ///     <see cref="M:Thief.FPMath.CeilToInt(Thief.FP)" />
+        ///     faster than calling <see cref="M:Herta.FPMath.Log2(Herta.FP)" /> and then
+        ///     <see cref="M:Herta.FPMath.CeilToInt(Herta.FP)" />
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -670,7 +670,7 @@ namespace Thief
         /// <summary>
         ///     Returns logarithm of <paramref name="value" /> in base 2.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         public static FP Log2(FP value)
@@ -682,7 +682,7 @@ namespace Thief
         /// <summary>
         ///     Returns natural logarithm of <paramref name="value" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         public static FP Ln(FP value)
@@ -697,7 +697,7 @@ namespace Thief
         /// <summary>
         ///     Returns logarithm of <paramref name="value" /> in base 10.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         public static FP Log10(FP value)
@@ -713,7 +713,7 @@ namespace Thief
         ///     Returns logarithm of <paramref name="value" /> in base <paramref name="logBase" />.
         ///     It is much more performant and precise to use Log2, Log10 and Ln if <paramref name="logBase" /> is 2, 10 or e.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <param name="logBase"></param>
         /// <returns></returns>
@@ -783,7 +783,7 @@ namespace Thief
         /// <summary>
         ///     Returns the sine of angle <paramref name="rad" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="rad">Angle in radians</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -800,7 +800,7 @@ namespace Thief
         /// <summary>
         ///     Returns the high precision sine of angle <paramref name="rad" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="rad">Angle in radians</param>
         /// <returns></returns>
         public static FP SinHighPrecision(FP rad)
@@ -816,7 +816,7 @@ namespace Thief
         /// <summary>
         ///     Returns the cosine of angle <paramref name="rad" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="rad">Angle in radians</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -833,7 +833,7 @@ namespace Thief
         /// <summary>
         ///     Returns the high precision cosine of angle <paramref name="rad" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="rad">Angle in radians</param>
         /// <returns></returns>
         public static FP CosHighPrecision(FP rad)
@@ -848,10 +848,10 @@ namespace Thief
 
         /// <summary>
         ///     Calculates sine and cosine of angle <paramref name="rad" />. It is faster than
-        ///     calling <see cref="M:Thief.FPMath.Sin(Thief.FP)" />  and
-        ///     <see cref="M:Thief.FPMath.Cos(Thief.FP)" /> separately.
+        ///     calling <see cref="M:Herta.FPMath.Sin(Herta.FP)" />  and
+        ///     <see cref="M:Herta.FPMath.Cos(Herta.FP)" /> separately.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="rad">Angle in radians</param>
         /// <param name="sin"></param>
         /// <param name="cos"></param>
@@ -879,10 +879,10 @@ namespace Thief
 
         /// <summary>
         ///     Calculates high precision sine and cosine of angle <paramref name="rad" />. It is faster than
-        ///     calling <see cref="M:Thief.FPMath.SinHighPrecision(Thief.FP)" />  and
-        ///     <see cref="M:Thief.FPMath.CosHighPrecision(Thief.FP)" /> separately.
+        ///     calling <see cref="M:Herta.FPMath.SinHighPrecision(Herta.FP)" />  and
+        ///     <see cref="M:Herta.FPMath.CosHighPrecision(Herta.FP)" /> separately.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="rad">Angle in radians</param>
         /// <param name="sin"></param>
         /// <param name="cos"></param>
@@ -899,7 +899,7 @@ namespace Thief
         /// <summary>
         ///     Returns the tangent of angle <paramref name="rad" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="rad">Angle in radians</param>
         /// <returns></returns>
         public static FP Tan(FP rad)
@@ -915,7 +915,7 @@ namespace Thief
         /// <summary>
         ///     Returns the arc-sine of <paramref name="value" /> - the angle in radians whose sine is <paramref name="value" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         public static FP Asin(FP value)
@@ -930,7 +930,7 @@ namespace Thief
         ///     Returns the arc-cosine of <paramref name="value" /> - the angle in radians whose cosine is
         ///     <paramref name="value" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         public static FP Acos(FP value)
@@ -945,7 +945,7 @@ namespace Thief
         ///     Returns the arc-tangent of <paramref name="value" /> - the angle in radians whose tangent is
         ///     <paramref name="value" />.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         public static FP Atan(FP value)
@@ -977,10 +977,10 @@ namespace Thief
         }
 
         /// <summary>
-        ///     Returns the angle in radians whose <see cref="M:Thief.FPMath.Tan(Thief.FP)" /> is
+        ///     Returns the angle in radians whose <see cref="M:Herta.FPMath.Tan(Herta.FP)" /> is
         ///     <paramref name="y" />/<paramref name="x" />. This function returns correct angle even if x is zero.
         /// </summary>
-        /// <remarks><see cref="T:Thief.FPLut" /> needs to be initialised.</remarks>
+        /// <remarks><see cref="T:Herta.FPLut" /> needs to be initialised.</remarks>
         /// <param name="y"></param>
         /// <param name="x"></param>
         /// <returns></returns>

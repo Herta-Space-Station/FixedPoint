@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ALL
 
-namespace Thief
+namespace Herta
 {
     /// <summary>
     ///     Represents 4x4 column major matrix.
@@ -72,12 +72,12 @@ namespace Thief
         [FieldOffset(120)] public FP M33;
 
         /// <summary>Matrix with 0s in every cell.</summary>
-        public static FPMatrix4x4 Zero => new FPMatrix4x4();
+        public static readonly FPMatrix4x4 Zero = new FPMatrix4x4();
 
         /// <summary>
         ///     Matrix with 1s in the main diagonal and 0s in all other cells.
         /// </summary>
-        public static FPMatrix4x4 Identity => new FPMatrix4x4()
+        public static readonly FPMatrix4x4 Identity = new FPMatrix4x4()
         {
             M00 =
             {
@@ -299,7 +299,7 @@ namespace Thief
 
         /// <summary>
         ///     Returns <see langword="true" /> if this matrix is equal to the
-        ///     <see cref="P:Thief.FPMatrix4x4.Identity" /> matrix
+        ///     <see cref="P:Herta.FPMatrix4x4.Identity" /> matrix
         /// </summary>
         public bool IsIdentity => this.M00 == 1 && this.M11 == 1 && this.M22 == 1 && this.M33 == 1 && (this.M01.RawValue | this.M02.RawValue | this.M03.RawValue | this.M10.RawValue | this.M12.RawValue | this.M13.RawValue | this.M20.RawValue | this.M21.RawValue | this.M23.RawValue | this.M30.RawValue | this.M31.RawValue | this.M32.RawValue) == 0L;
 
@@ -322,7 +322,7 @@ namespace Thief
         ///     Creates look-at matrix, i.e. world to observer transformation. Unity's Matrix4x4.LookAt does the opposite - creates
         ///     observer to world transformation. To get same behaviour use
         ///     <see
-        ///         cref="M:Thief.FPMatrix4x4.InverseLookAt(Thief.FPVector3,Thief.FPVector3,Thief.FPVector3)" />
+        ///         cref="M:Herta.FPMatrix4x4.InverseLookAt(Herta.FPVector3,Herta.FPVector3,Herta.FPVector3)" />
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -395,7 +395,7 @@ namespace Thief
 
         /// <summary>
         ///     Creates inverted matrix. Matrix with determinant 0 can not be inverted and result with
-        ///     <see cref="P:Thief.FPMatrix4x4.Zero" />.
+        ///     <see cref="P:Herta.FPMatrix4x4.Zero" />.
         /// </summary>
         public FPMatrix4x4 Inverted
         {
@@ -544,7 +544,7 @@ namespace Thief
 
         /// <summary>
         ///     Transforms a position by this matrix. Faster than
-        ///     <see cref="M:Thief.FPMatrix4x4.MultiplyPoint(Thief.FPVector3)" />, but works only
+        ///     <see cref="M:Herta.FPMatrix4x4.MultiplyPoint(Herta.FPVector3)" />, but works only
         ///     with regulard 3D transformations.
         /// </summary>
         public FPVector3 MultiplyPoint3x4(FPVector3 point)

@@ -1,11 +1,12 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace Benchmark;
-
-class Program
+namespace Benchmark
 {
-    static void Main(string[] args)
+    internal sealed class Program
     {
-        BenchmarkRunner.Run<Benchmark1>();
+        private static void Main(string[] args)
+        {
+            BenchmarkRunner.Run<BenchmarkEmpty>();
+        }
     }
 }
