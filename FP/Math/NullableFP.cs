@@ -65,6 +65,6 @@ namespace Herta
         ///     Computes the hash code for the current instance of the NullableFP struct.
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode() => this._hasValue == 0L ? 0 : this._value.GetHashCode();
+        public override int GetHashCode() => !this.HasValue ? 0 : XxHash.Hash32(Value);
     }
 }

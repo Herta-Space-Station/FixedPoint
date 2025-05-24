@@ -71,6 +71,6 @@ namespace Herta
         ///     If <see cref="P:Herta.NullableFPVector3.HasValue" /> is <see langword="true" />, the hash code is
         ///     calculated based on the value of <see cref="P:Herta.NullableFPVector3.Value" />.
         /// </remarks>
-        public override int GetHashCode() => this._hasValue == 0L ? 0 : this._value.GetHashCode();
+        public override int GetHashCode() => !this.HasValue ? 0 : XxHash.Hash32(Value);
     }
 }

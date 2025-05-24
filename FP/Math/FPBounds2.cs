@@ -114,6 +114,6 @@ namespace Herta
 
         /// <summary>Computes the hash code of the FPBounds2 instance.</summary>
         /// <returns>The hash code of the FPBounds2 object.</returns>
-        public override int GetHashCode() => (17 * 31 + this.Center.GetHashCode()) * 31 + this.Extents.GetHashCode();
+        public override int GetHashCode() => XxHash.Hash32(this);
     }
 }

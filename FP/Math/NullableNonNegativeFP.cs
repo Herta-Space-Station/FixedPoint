@@ -84,6 +84,6 @@ namespace Herta
         ///     Computes the hash code for the current instance of the FP struct.
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode() => !this.HasValue ? 0 : this.Value.GetHashCode();
+        public override int GetHashCode() => !this.HasValue ? 0 : XxHash.Hash32(Value);
     }
 }

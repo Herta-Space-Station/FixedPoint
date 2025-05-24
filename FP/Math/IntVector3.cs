@@ -79,7 +79,7 @@ namespace Herta
         public static readonly IntVector3 Zero = new IntVector3(0, 0, 0);
 
         /// <summary>Returns a hash code for the vector.</summary>
-        public override int GetHashCode() => HashCode.Combine<int, int, int>(this.X, this.Y, this.Z);
+        public override int GetHashCode() => XxHash.Hash32(this);
 
         /// <summary>Returns a string representation of the IntVector3.</summary>
         /// <returns>A string representation of the IntVector3.</returns>

@@ -325,7 +325,7 @@ namespace Herta
 
         /// <summary>Gets the hashcode of the vector.</summary>
         /// <returns>Returns the hashcode of the vector.</returns>
-        public override int GetHashCode() => ((17 * 31 + this.X.GetHashCode()) * 31 + this.Y.GetHashCode()) * 31 + this.Z.GetHashCode();
+        public override int GetHashCode() => XxHash.Hash32(this);
 
         /// <summary>
         ///     Returns a vector where each component is the absolute value of same component in <paramref name="value" />.
