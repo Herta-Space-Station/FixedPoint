@@ -273,7 +273,7 @@ namespace Herta
         ///     Calculates the hash code for the current FPMatrix3x3 instance.
         /// </summary>
         /// <returns>The calculated hash code.</returns>
-        public override int GetHashCode() => ((((((((17 * 31 + this.M00.GetHashCode()) * 31 + this.M10.GetHashCode()) * 31 + this.M20.GetHashCode()) * 31 + this.M01.GetHashCode()) * 31 + this.M11.GetHashCode()) * 31 + this.M21.GetHashCode()) * 31 + this.M02.GetHashCode()) * 31 + this.M12.GetHashCode()) * 31 + this.M22.GetHashCode();
+        public override int GetHashCode() => XxHash.Hash32(this);
 
         /// <summary>Adds two matrices.</summary>
         public static FPMatrix3x3 operator +(FPMatrix3x3 a, FPMatrix3x3 b)

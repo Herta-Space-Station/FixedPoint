@@ -611,7 +611,7 @@ namespace Herta
         ///     Computes the hash code for the current instance of the FP struct.
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode() => this.RawValue.GetHashCode();
+        public override int GetHashCode() => XxHash.Hash32(this);
 
         [ThreadStatic] private static StringBuilder? _stringBuilder;
 
@@ -665,7 +665,7 @@ namespace Herta
         /// <returns>
         ///     The string representation of the value of the current FP object, formatted using the legacy format.
         /// </returns>
-        [Obsolete]
+        [Obsolete("Use ToString instead.")]
         public string ToStringLegacy() => this.AsFloat.ToString((IFormatProvider)CultureInfo.InvariantCulture);
 
         /// <summary>

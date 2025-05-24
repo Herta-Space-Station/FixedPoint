@@ -356,7 +356,7 @@ namespace Herta
 
         /// <summary>Computes the hash code for the current instance.</summary>
         /// <returns>The hash code for the current instance.</returns>
-        public override int GetHashCode() => (((((((((((((((17 * 31 + this.M00.GetHashCode()) * 31 + this.M10.GetHashCode()) * 31 + this.M20.GetHashCode()) * 31 + this.M30.GetHashCode()) * 31 + this.M01.GetHashCode()) * 31 + this.M11.GetHashCode()) * 31 + this.M21.GetHashCode()) * 31 + this.M31.GetHashCode()) * 31 + this.M02.GetHashCode()) * 31 + this.M12.GetHashCode()) * 31 + this.M22.GetHashCode()) * 31 + this.M32.GetHashCode()) * 31 + this.M03.GetHashCode()) * 31 + this.M13.GetHashCode()) * 31 + this.M23.GetHashCode()) * 31 + this.M33.GetHashCode();
+        public override int GetHashCode() => XxHash.Hash32(this);
 
         /// <summary>Multiplies two matrices.</summary>
         public static FPMatrix4x4 operator *(FPMatrix4x4 a, FPMatrix4x4 b)

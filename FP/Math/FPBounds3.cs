@@ -126,6 +126,6 @@ namespace Herta
         ///     and <see cref="F:Herta.FPBounds3.Extents" />.
         /// </remarks>
         /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode() => (17 * 31 + this.Center.GetHashCode()) * 31 + this.Extents.GetHashCode();
+        public override int GetHashCode() => XxHash.Hash32(this);
     }
 }

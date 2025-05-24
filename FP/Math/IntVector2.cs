@@ -84,7 +84,7 @@ namespace Herta
         }
 
         /// <summary>Returns a hash code for this instance.</summary>
-        public override int GetHashCode() => HashCode.Combine<int, int>(this.X, this.Y);
+        public override int GetHashCode() => XxHash.Hash32(this);
 
         /// <summary>
         ///     Returns a string that represents the current IntVector2.

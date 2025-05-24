@@ -98,7 +98,7 @@ namespace Herta
         ///     Returns a hash code for the current FPQuaternion object.
         /// </summary>
         /// <returns>A hash code for the current FPQuaternion object.</returns>
-        public override int GetHashCode() => (((17 * 31 + this.X.GetHashCode()) * 31 + this.Y.GetHashCode()) * 31 + this.Z.GetHashCode()) * 31 + this.W.GetHashCode();
+        public override int GetHashCode() => XxHash.Hash32(this);
 
         /// <summary>
         ///     Creates product of two quaternions. Can be used to combine two rotations. Just like

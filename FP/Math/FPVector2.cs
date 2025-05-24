@@ -288,7 +288,7 @@ namespace Herta
         ///     Computes the hash code for the current FPVector2 object.
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode() => (17 * 31 + this.X.GetHashCode()) * 31 + this.Y.GetHashCode();
+        public override int GetHashCode() => XxHash.Hash32(this);
 
         /// <summary>
         ///     Returns a string that represents the current FPVector2 instance.
