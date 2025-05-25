@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 // ReSharper disable ALL
 
@@ -352,7 +353,83 @@ namespace Herta
         ///     as a 4x4 matrix.
         /// </summary>
         /// <returns>A string representation of the FPMatrix4x4 object.</returns>
-        public override string ToString() => string.Format((IFormatProvider)CultureInfo.InvariantCulture, "(({0}, {1}, {2}, {3}), ({4}, {5}, {6}, {7}), ({8}, {9}, {10}, {11}), ({12}, {13}, {14}, {15}))", (object)this.M00.AsFloat, (object)this.M01.AsFloat, (object)this.M02.AsFloat, (object)this.M03.AsFloat, (object)this.M10.AsFloat, (object)this.M11.AsFloat, (object)this.M12.AsFloat, (object)this.M13.AsFloat, (object)this.M20.AsFloat, (object)this.M21.AsFloat, (object)this.M22.AsFloat, (object)this.M23.AsFloat, (object)this.M30.AsFloat, (object)this.M31.AsFloat, (object)this.M32.AsFloat, (object)this.M33.AsFloat);
+        public override string ToString()
+        {
+            NativeString builder = new NativeString(stackalloc char[512], 0);
+            Format(ref builder);
+
+            return builder.ToString();
+        }
+
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            NativeString builder = new NativeString(stackalloc char[512], 0);
+            Format(ref builder);
+
+            bool result = builder.TryCopyTo(destination);
+            charsWritten = result ? builder.Length : 0;
+            return result;
+        }
+
+        private void Format(ref NativeString builder)
+        {
+            builder.Append('(');
+            builder.Append('(');
+            builder.AppendFormattable(this.M00.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M01.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M02.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M03.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(',');
+            builder.Append(' ');
+            builder.Append('(');
+            builder.AppendFormattable(this.M10.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M11.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M12.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M13.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(',');
+            builder.Append(' ');
+            builder.Append('(');
+            builder.AppendFormattable(this.M20.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M21.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M22.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M23.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(',');
+            builder.Append(' ');
+            builder.Append('(');
+            builder.AppendFormattable(this.M30.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M31.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M32.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M33.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(')');
+        }
 
         /// <summary>Computes the hash code for the current instance.</summary>
         /// <returns>The hash code for the current instance.</returns>

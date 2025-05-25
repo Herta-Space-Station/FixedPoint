@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 // ReSharper disable ALL
 
@@ -70,7 +71,13 @@ namespace Herta
         public static implicit operator NullableNonNegativeFP(FP v)
         {
             if (v < 0)
-                throw new ArgumentOutOfRangeException(string.Format("Non negative values only allowed: {0}", (object)v));
+            {
+                NativeString builder = new NativeString(stackalloc char[128]);
+                builder.Append("Non negative values only allowed: ");
+                builder.AppendFormattable(v);
+                throw new ArgumentOutOfRangeException(builder.ToString());
+            }
+
             NullableNonNegativeFP nullableNonNegativeFp;
             nullableNonNegativeFp._value = (ulong)(v.RawValue | long.MinValue);
             return nullableNonNegativeFp;

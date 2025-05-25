@@ -5,6 +5,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Herta;
 
+// ReSharper disable ALL
+
 namespace Test
 {
     internal sealed class Program
@@ -14,9 +16,92 @@ namespace Test
             return MemoryMarshal.CreateSpan(ref Unsafe.As<T1, byte>(ref Unsafe.AsRef(in arg1)), Unsafe.SizeOf<T1>()).SequenceEqual(MemoryMarshal.CreateSpan(ref Unsafe.As<T2, byte>(ref Unsafe.AsRef(in arg2)), Unsafe.SizeOf<T2>()));
         }
 
-        private static void Main()
+        static void Main()
         {
-            Console.WriteLine(FP.FromDouble_SAFE(100.0).AsDouble);
+            for (uint num3 = 0; num3 < 65536; num3++)
+            {
+                uint num8;
+                if (num3 == 0)
+                {
+                    num8 = 0;
+                    goto lablel;
+                }
+
+                uint num5 = (uint)((ulong)(uint)(((int)num3 << 1) - 1) * 762939453125UL / 10000000000UL);
+                uint num6 = (uint)((ulong)(uint)(((int)num3 << 1) + 1) * 762939453125UL / 10000000000UL);
+                uint num7 = num5 + num6 >> 1;
+                num8 = (int)(num5 / 10000U) != (int)(num6 / 10000U) ? ((int)(num5 / 100000U) != (int)(num6 / 100000U) ? ((int)(num5 / 1000000U) != (int)(num6 / 1000000U) ? (num7 + 500000U) / 1000000U * 10000U : (num7 + 50000U) / 100000U * 1000U) : (num7 + 5000U) / 10000U * 100U) : ((int)(num5 / 1000U) != (int)(num6 / 1000U) ? (num7 + 500U) / 1000U * 10U : (num7 + 50U) / 100U);
+
+                lablel:
+
+                uint a = FPLut.Fraction[(int)num3];
+
+                if (!(num8 == a))
+                    throw new Exception($"Mismatch at {num3}: expected {a}, got {num8}");
+            }
+
+            Console.WriteLine("All tests passed! All table entries match the original calculation.");
+        }
+
+        static void Test4()
+        {
+            while (true)
+            {
+                long value = Random.Shared.NextInt64(FP.MinValue.RawValue, FP.MaxValue.RawValue);
+                FP a = Unsafe.As<long, FP>(ref value);
+                (int Sign, ulong Integer, uint Fraction) b1 = GetDecimalParts(a);
+                (int Sign, ulong Integer, uint Fraction) b2 = GetDecimalParts2(a);
+
+                if (b1 != b2)
+                    throw new Exception("error1");
+            }
+        }
+
+        internal static (int Sign, ulong Integer, uint Fraction) GetDecimalParts2(FP v)
+        {
+            int num1;
+            ulong num2;
+            if (v.RawValue < 0L)
+            {
+                num1 = -1;
+                num2 = (ulong)-v.RawValue;
+            }
+            else
+            {
+                num1 = 1;
+                num2 = (ulong)v.RawValue;
+            }
+
+            uint num3 = (uint)(num2 & (ulong)ushort.MaxValue);
+            ulong num4 = num2 >> 16;
+            uint num5 = FPLut.Fraction[(int)num3];
+            return (num1, num4, num5);
+        }
+
+        internal static (int Sign, ulong Integer, uint Fraction) GetDecimalParts(FP v)
+        {
+            int num1;
+            ulong num2;
+            if (v.RawValue < 0L)
+            {
+                num1 = -1;
+                num2 = (ulong)-v.RawValue;
+            }
+            else
+            {
+                num1 = 1;
+                num2 = (ulong)v.RawValue;
+            }
+
+            uint num3 = (uint)(num2 & (ulong)ushort.MaxValue);
+            ulong num4 = num2 >> 16;
+            if (num3 == 0U)
+                return (num1, num4, 0U);
+            uint num5 = (uint)((ulong)(uint)(((int)num3 << 1) - 1) * 762939453125UL / 10000000000UL);
+            uint num6 = (uint)((ulong)(uint)(((int)num3 << 1) + 1) * 762939453125UL / 10000000000UL);
+            uint num7 = num5 + num6 >> 1;
+            uint num8 = (int)(num5 / 10000U) != (int)(num6 / 10000U) ? ((int)(num5 / 100000U) != (int)(num6 / 100000U) ? ((int)(num5 / 1000000U) != (int)(num6 / 1000000U) ? (num7 + 500000U) / 1000000U * 10000U : (num7 + 50000U) / 100000U * 1000U) : (num7 + 5000U) / 10000U * 100U) : ((int)(num5 / 1000U) != (int)(num6 / 1000U) ? (num7 + 500U) / 1000U * 10U : (num7 + 50U) / 100U);
+            return (num1, num4, num8);
         }
 
         private static void Test2()

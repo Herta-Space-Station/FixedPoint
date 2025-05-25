@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 // ReSharper disable ALL
 
@@ -83,7 +83,36 @@ namespace Herta
 
         /// <summary>Returns a string representation of the IntVector3.</summary>
         /// <returns>A string representation of the IntVector3.</returns>
-        public override string ToString() => string.Format((IFormatProvider)CultureInfo.InvariantCulture, "({0}, {1}, {2})", (object)this.X, (object)this.Y, (object)this.Z);
+        public override string ToString()
+        {
+            NativeString builder = new NativeString(stackalloc char[128], 0);
+            Format(ref builder);
+
+            return builder.ToString();
+        }
+
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            NativeString builder = new NativeString(stackalloc char[128], 0);
+            Format(ref builder);
+
+            bool result = builder.TryCopyTo(destination);
+            charsWritten = result ? builder.Length : 0;
+            return result;
+        }
+
+        private void Format(ref NativeString builder)
+        {
+            builder.Append('(');
+            builder.AppendFormattable(this.X);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.Y);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.Z);
+            builder.Append(')');
+        }
 
         /// <summary>Calculates the magnitude (length) of the IntVector3.</summary>
         /// <value>The magnitude of the IntVector3.</value>

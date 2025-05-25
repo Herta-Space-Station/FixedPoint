@@ -15,4 +15,10 @@
       <ProjectReference Include="..\FP\FP.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="FPLut">
+        <HintPath>..\FP\FPLut.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

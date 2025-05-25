@@ -16,6 +16,8 @@ using Microsoft.CodeAnalysis.Editing;
 #pragma warning disable RS1038
 #pragma warning disable RS2008
 
+// ReSharper disable ALL
+
 namespace Herta.Roslyn
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(StaticGetPropertyCodeFixProvider))]
@@ -28,9 +30,9 @@ namespace Herta.Roslyn
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var diagnostic = context.Diagnostics[0];
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-            var property = root.FindNode(diagnostic.Location.SourceSpan) as PropertyDeclarationSyntax;
+            Diagnostic diagnostic = context.Diagnostics[0];
+            SyntaxNode? root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            PropertyDeclarationSyntax? property = root.FindNode(diagnostic.Location.SourceSpan) as PropertyDeclarationSyntax;
             if (property == null)
                 return;
             context.RegisterCodeFix(CodeAction.Create("Convert to static readonly field", c => ConvertToFieldAsync(context.Document, property, c), "ConvertToField"), diagnostic);
@@ -38,17 +40,17 @@ namespace Herta.Roslyn
 
         private async Task<Document> ConvertToFieldAsync(Document document, PropertyDeclarationSyntax property, CancellationToken cancellationToken)
         {
-            var generator = SyntaxGenerator.GetGenerator(document);
-            var fieldName = property.Identifier.Text;
-            var fieldType = property.Type;
-            var fieldValue = generator.DefaultExpression(fieldType);
+            SyntaxGenerator generator = SyntaxGenerator.GetGenerator(document);
+            string fieldName = property.Identifier.Text;
+            TypeSyntax fieldType = property.Type;
+            SyntaxNode fieldValue = generator.DefaultExpression(fieldType);
             if (property.ExpressionBody != null)
             {
                 fieldValue = property.ExpressionBody.Expression;
             }
             else
             {
-                var getter = property.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
+                AccessorDeclarationSyntax? getter = property.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
                 if (getter != null)
                 {
                     if (getter.ExpressionBody != null)
@@ -57,23 +59,23 @@ namespace Herta.Roslyn
                     }
                     else if (getter.Body != null)
                     {
-                        var returnStatement = getter.Body.Statements.OfType<ReturnStatementSyntax>().FirstOrDefault();
+                        ReturnStatementSyntax? returnStatement = getter.Body.Statements.OfType<ReturnStatementSyntax>().FirstOrDefault();
                         if (returnStatement != null)
                             fieldValue = returnStatement.Expression ?? fieldValue;
                     }
                 }
             }
 
-            var fieldDeclaration = generator.FieldDeclaration(fieldName, fieldType, Accessibility.Public, DeclarationModifiers.Static | DeclarationModifiers.ReadOnly, fieldValue);
-            var leadingTrivia = property.GetLeadingTrivia();
+            SyntaxNode fieldDeclaration = generator.FieldDeclaration(fieldName, fieldType, Accessibility.Public, DeclarationModifiers.Static | DeclarationModifiers.ReadOnly, fieldValue);
+            SyntaxTriviaList leadingTrivia = property.GetLeadingTrivia();
             if (leadingTrivia.Any())
             {
-                var fieldSyntax = (FieldDeclarationSyntax)fieldDeclaration;
+                FieldDeclarationSyntax fieldSyntax = (FieldDeclarationSyntax)fieldDeclaration;
                 fieldDeclaration = fieldSyntax.WithLeadingTrivia(leadingTrivia);
             }
 
-            var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var newRoot = root.ReplaceNode(property, fieldDeclaration);
+            SyntaxNode? root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            SyntaxNode? newRoot = root.ReplaceNode(property, fieldDeclaration);
             return document.WithSyntaxRoot(newRoot);
         }
     }

@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 // ReSharper disable ALL
 
@@ -267,7 +268,60 @@ namespace Herta
         ///     where {0} to {8} are the formatted string representations of the matrix elements.
         /// </summary>
         /// <returns>A string representation of the FPMatrix3x3.</returns>
-        public override string ToString() => string.Format((IFormatProvider)CultureInfo.InvariantCulture, "(({0}, {1}, {2}), ({3}, {4}, {5}), ({6}, {7}, {8}))", (object)this.M00.AsFloat, (object)this.M01.AsFloat, (object)this.M02.AsFloat, (object)this.M10.AsFloat, (object)this.M11.AsFloat, (object)this.M12.AsFloat, (object)this.M20.AsFloat, (object)this.M21.AsFloat, (object)this.M22.AsFloat);
+        public override string ToString()
+        {
+            NativeString builder = new NativeString(stackalloc char[256], 0);
+            Format(ref builder);
+
+            return builder.ToString();
+        }
+
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            NativeString builder = new NativeString(stackalloc char[256], 0);
+            Format(ref builder);
+
+            bool result = builder.TryCopyTo(destination);
+            charsWritten = result ? builder.Length : 0;
+            return result;
+        }
+
+        private void Format(ref NativeString builder)
+        {
+            builder.Append('(');
+            builder.Append('(');
+            builder.AppendFormattable(this.M00.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M01.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M02.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(',');
+            builder.Append(' ');
+            builder.Append('(');
+            builder.AppendFormattable(this.M10.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M11.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M12.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(',');
+            builder.Append(' ');
+            builder.Append('(');
+            builder.AppendFormattable(this.M20.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M21.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M22.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(')');
+        }
 
         /// <summary>
         ///     Calculates the hash code for the current FPMatrix3x3 instance.

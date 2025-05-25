@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 // ReSharper disable ALL
 
@@ -90,7 +90,33 @@ namespace Herta
         ///     Returns a string that represents the current IntVector2.
         /// </summary>
         /// <returns>A string that represents the current IntVector2.</returns>
-        public override string ToString() => string.Format((IFormatProvider)CultureInfo.InvariantCulture, "({0}, {1})", (object)this.X, (object)this.Y);
+        public override string ToString()
+        {
+            NativeString builder = new NativeString(stackalloc char[64], 0);
+            Format(ref builder);
+
+            return builder.ToString();
+        }
+
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            NativeString builder = new NativeString(stackalloc char[64], 0);
+            Format(ref builder);
+
+            bool result = builder.TryCopyTo(destination);
+            charsWritten = result ? builder.Length : 0;
+            return result;
+        }
+
+        private void Format(ref NativeString builder)
+        {
+            builder.Append('(');
+            builder.AppendFormattable(this.X);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.Y);
+            builder.Append(')');
+        }
 
         /// <summary>Gets the magnitude of the vector.</summary>
         public FP Magnitude
