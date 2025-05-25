@@ -1,6 +1,4 @@
-﻿using NativeCollections;
-
-// ReSharper disable ALL
+﻿// ReSharper disable ALL
 
 namespace Herta
 {

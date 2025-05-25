@@ -8,7 +8,7 @@ namespace Benchmark
     {
         private static void Main(string[] args)
         {
-            BenchmarkRunner.Run<BenchmarkToString2>();
+            BenchmarkRunner.Run<BenchmarkToString>();
         }
     }
 }

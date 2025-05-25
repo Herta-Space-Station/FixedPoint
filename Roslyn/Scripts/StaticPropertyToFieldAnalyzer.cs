@@ -17,7 +17,7 @@ namespace Herta.Roslyn
     {
         public const string DIAGNOSTIC_ID = "MY0001";
 
-        private static readonly DiagnosticDescriptor Rule = new(DIAGNOSTIC_ID, "Use static readonly field instead of static get-only property", "Property '{0}' can be converted to static readonly field", "Performance", DiagnosticSeverity.Warning, true);
+        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DIAGNOSTIC_ID, "Use static readonly field instead of static get-only property", "Property '{0}' can be converted to static readonly field", "Performance", DiagnosticSeverity.Warning, true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
