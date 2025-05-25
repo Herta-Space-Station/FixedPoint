@@ -470,7 +470,7 @@ namespace Herta
                 return (long)(FPLut.SqrtAprox[(int)x] >> 6);
             }
 
-            int log2 = 63 - BitOperationsHelpers.LeadingZeroCount((ulong)x);
+            int log2 = BitOperationsHelpers.Log2((ulong)x);
             int num2 = log2 & ~1;
             int num3 = num2 - 16 + 2;
 
@@ -492,7 +492,7 @@ namespace Herta
                 };
             }
 
-            int log2 = 63 - BitOperationsHelpers.LeadingZeroCount(x);
+            int log2 = BitOperationsHelpers.Log2((ulong)x);
             int num2 = log2 & ~1;
             int num3 = num2 - 16 + 2;
 
