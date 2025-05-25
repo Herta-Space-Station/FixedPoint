@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 // ReSharper disable ALL
 
@@ -294,7 +295,33 @@ namespace Herta
         ///     Returns a string that represents the current FPVector2 instance.
         /// </summary>
         /// <returns>A string representation of the current FPVector2 instance.</returns>
-        public override string ToString() => string.Format((IFormatProvider)CultureInfo.InvariantCulture, "({0}, {1})", (object)this.X.AsFloat, (object)this.Y.AsFloat);
+        public override string ToString()
+        {
+            NativeString builder = new NativeString(stackalloc char[64], 0);
+            Format(ref builder);
+
+            return builder.ToString();
+        }
+
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            NativeString builder = new NativeString(stackalloc char[64], 0);
+            Format(ref builder);
+
+            bool result = builder.TryCopyTo(destination);
+            charsWritten = result ? builder.Length : 0;
+            return result;
+        }
+
+        private void Format(ref NativeString builder)
+        {
+            builder.Append('(');
+            builder.AppendFormattable(this.X.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.Y.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+        }
 
         /// <summary>Calculates the distance between two vectors</summary>
         /// <param name="a">First vector</param>

@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 // ReSharper disable ALL
 
@@ -92,7 +93,39 @@ namespace Herta
         ///     Returns a string representation of the FPQuaternion in the format (X, Y, Z, W).
         /// </summary>
         /// <returns>A string representation of the FPQuaternion.</returns>
-        public override string ToString() => string.Format((IFormatProvider)CultureInfo.InvariantCulture, "({0:f1}, {1:f1}, {2:f1}, {3:f1})", (object)this.X.AsFloat, (object)this.Y.AsFloat, (object)this.Z.AsFloat, (object)this.W.AsFloat);
+        public override string ToString()
+        {
+            NativeString builder = new NativeString(stackalloc char[128], 0);
+            Format(ref builder);
+
+            return builder.ToString();
+        }
+
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            NativeString builder = new NativeString(stackalloc char[128], 0);
+            Format(ref builder);
+
+            bool result = builder.TryCopyTo(destination);
+            charsWritten = result ? builder.Length : 0;
+            return result;
+        }
+
+        private void Format(ref NativeString builder)
+        {
+            builder.Append('(');
+            builder.AppendFormattable(this.X.AsFloat, "f1", (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.Y.AsFloat, "f1", (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.Z.AsFloat, "f1", (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.W.AsFloat, "f1", (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+        }
 
         /// <summary>
         ///     Returns a hash code for the current FPQuaternion object.

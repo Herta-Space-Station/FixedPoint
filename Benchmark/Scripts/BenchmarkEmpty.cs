@@ -14,7 +14,7 @@ namespace Benchmark
     [ShortRunJob]
     [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
     [CategoriesColumn]
-    public sealed class BenchmarkEmpty
+    public class BenchmarkEmpty
     {
         [Params(1000, 10000, 100000)] public int Count { get; set; }
 

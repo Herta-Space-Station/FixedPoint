@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
+using NativeCollections;
 
 #pragma warning disable CA2208
 #pragma warning disable CS8632
@@ -613,50 +613,49 @@ namespace Herta
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode() => XxHash.Hash32(this);
 
-        [ThreadStatic] private static StringBuilder? _stringBuilder;
-
         /// <summary>
         ///     Returns a string representation of the current FP value.
         /// </summary>
         /// <returns>A string representation of the current FP value.</returns>
         public override string ToString()
         {
+            NativeString builder = new NativeString(stackalloc char[32], 0);
+            Format(ref builder);
+
+            return builder.ToString();
+        }
+
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            NativeString builder = new NativeString(stackalloc char[32]);
+            Format(ref builder);
+
+            bool result = builder.TryCopyTo(destination);
+            charsWritten = result ? builder.Length : 0;
+            return result;
+        }
+
+        private void Format(ref NativeString builder)
+        {
             (int Sign, ulong Integer, uint Fraction) = this.GetDecimalParts();
             if (Fraction == 0U)
-                return (this.RawValue >> 16).ToString();
-            StringBuilder stringBuilder = _stringBuilder ??= new StringBuilder();
-            if (Sign < 0)
-                stringBuilder.Append('-');
-            stringBuilder.Append(Integer);
-            stringBuilder.Append('.');
-            if (Fraction < 10000U)
             {
-                stringBuilder.Append('0');
-                if (Fraction < 1000U)
-                {
-                    stringBuilder.Append('0');
-                    if (Fraction < 100U)
-                    {
-                        stringBuilder.Append('0');
-                        if (Fraction < 10U)
-                            stringBuilder.Append('0');
-                    }
-                }
+                builder.AppendFormattable(this.RawValue >> 16);
+                return;
             }
 
-            if (Fraction % 10000U == 0U)
-                Fraction /= 10000U;
-            else if (Fraction % 1000U == 0U)
-                Fraction /= 1000U;
-            else if (Fraction % 100U == 0U)
-                Fraction /= 100U;
-            else if (Fraction % 10U == 0U)
-                Fraction /= 10U;
-            stringBuilder.Append(Fraction);
+            if (Sign < 0)
+                builder.Append('-');
+            builder.AppendFormattable(Integer);
+            builder.Append('.');
+            if (Fraction == 0)
+            {
+                builder.Append('0');
+                return;
+            }
 
-            string str = stringBuilder.ToString();
-            stringBuilder.Clear();
-            return str;
+            builder.AppendFormattable(Fraction, "D5");
+            builder.TrimEnd('0');
         }
 
         /// <summary>
@@ -680,9 +679,36 @@ namespace Herta
         /// <returns>String representation of the FP.</returns>
         public string ToStringInternal()
         {
+            Span<char> buffer = stackalloc char[32 * 2];
+            NativeString builder1 = new NativeString(buffer.Slice(0, 32), 0);
+            NativeString builder2 = new NativeString(buffer.Slice(32), 0);
+            FormatInternal(ref builder1, ref builder2);
+
+            return builder1.ToString();
+        }
+
+        public bool TryFormatInternal(Span<char> destination, out int charsWritten)
+        {
+            Span<char> buffer = stackalloc char[32 * 2];
+            NativeString builder1 = new NativeString(buffer.Slice(0, 32), 0);
+            NativeString builder2 = new NativeString(buffer.Slice(32), 0);
+            FormatInternal(ref builder1, ref builder2);
+
+            bool result = builder1.TryCopyTo(destination);
+            charsWritten = result ? builder1.Length : 0;
+            return result;
+        }
+
+        private void FormatInternal(ref NativeString builder1, ref NativeString builder2)
+        {
             long num = Math.Abs(this.RawValue);
-            string str = string.Format("{0}.{1}", (object)(num >> 16), (object)(num % 65536L).ToString((IFormatProvider)CultureInfo.InvariantCulture).PadLeft(5, '0'));
-            return this.RawValue < 0L ? "-" + str : str;
+            if (this.RawValue < 0L)
+                builder1.Append('-');
+            builder1.AppendFormattable(num >> 16, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder1.Append('.');
+            builder2.AppendFormattable(num % 65536L, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder2.PadLeft(5, '0');
+            builder1.Append(builder2.Text);
         }
 
         /// <summary>
@@ -838,7 +864,7 @@ namespace Herta
             bool flag2 = s[0] == '.';
             Span<Range> strArray = stackalloc Range[2];
             int length = 0;
-            foreach (Range range in new SplitAnyRange<char>(s, ". "))
+            foreach (Range range in new NativeSplitAnyRange<char>(s, ". "))
             {
                 if (range.Start.Value == range.End.Value)
                     continue;
@@ -889,7 +915,7 @@ namespace Herta
             bool flag2 = s[0] == '.';
             Span<Range> strArray = stackalloc Range[2];
             int length = 0;
-            foreach (Range range in new SplitAnyRange<char>(s, ". "))
+            foreach (Range range in new NativeSplitAnyRange<char>(s, ". "))
             {
                 if (range.Start.Value == range.End.Value)
                     continue;
@@ -1012,13 +1038,8 @@ namespace Herta
 
             uint num3 = (uint)(num2 & (ulong)ushort.MaxValue);
             ulong num4 = num2 >> 16;
-            if (num3 == 0U)
-                return (num1, num4, 0U);
-            uint num5 = (uint)((ulong)(uint)(((int)num3 << 1) - 1) * 762939453125UL / 10000000000UL);
-            uint num6 = (uint)((ulong)(uint)(((int)num3 << 1) + 1) * 762939453125UL / 10000000000UL);
-            uint num7 = num5 + num6 >> 1;
-            uint num8 = (int)(num5 / 10000U) != (int)(num6 / 10000U) ? ((int)(num5 / 100000U) != (int)(num6 / 100000U) ? ((int)(num5 / 1000000U) != (int)(num6 / 1000000U) ? (num7 + 500000U) / 1000000U * 10000U : (num7 + 50000U) / 100000U * 1000U) : (num7 + 5000U) / 10000U * 100U) : ((int)(num5 / 1000U) != (int)(num6 / 1000U) ? (num7 + 500U) / 1000U * 10U : (num7 + 50U) / 100U);
-            return (num1, num4, num8);
+            uint num5 = FPLut.Fraction[(int)num3];
+            return (num1, num4, num5);
         }
 
         /// <summary>Negates the value.</summary>

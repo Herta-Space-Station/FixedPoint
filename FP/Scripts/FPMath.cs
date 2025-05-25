@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 #pragma warning disable CA2208
 #pragma warning disable CS8632
@@ -460,7 +461,13 @@ namespace Herta
             if (x <= 65536L)
             {
                 if (x < 0L)
-                    throw new ArgumentOutOfRangeException(nameof(x), string.Format("The number has to be positive: {0}", (object)x));
+                {
+                    NativeString builder = new NativeString(stackalloc char[128]);
+                    builder.Append("The number has to be positive: ");
+                    builder.AppendFormattable(x);
+                    throw new ArgumentOutOfRangeException(nameof(x), builder.ToString());
+                }
+
                 return (long)(FPLut.SqrtAprox[(int)x] >> 6);
             }
 

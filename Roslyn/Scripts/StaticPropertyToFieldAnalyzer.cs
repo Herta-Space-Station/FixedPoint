@@ -8,6 +8,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 #pragma warning disable RS1038
 #pragma warning disable RS2008
 
+// ReSharper disable ALL
+
 namespace Herta.Roslyn
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -28,22 +30,22 @@ namespace Herta.Roslyn
 
         private static void AnalyzeProperty(SyntaxNodeAnalysisContext context)
         {
-            var property = (PropertyDeclarationSyntax)context.Node;
-            var symbol = context.SemanticModel.GetDeclaredSymbol(property);
+            PropertyDeclarationSyntax property = (PropertyDeclarationSyntax)context.Node;
+            IPropertySymbol? symbol = context.SemanticModel.GetDeclaredSymbol(property);
             if (symbol == null)
                 return;
             if (!symbol.IsStatic || symbol.GetMethod == null || symbol.SetMethod != null)
                 return;
-            var propertyType = symbol.Type;
+            ITypeSymbol propertyType = symbol.Type;
             ITypeSymbol? getReturnType = null;
             if (property.ExpressionBody != null)
             {
-                var expr = property.ExpressionBody.Expression;
+                ExpressionSyntax expr = property.ExpressionBody.Expression;
                 getReturnType = context.SemanticModel.GetTypeInfo(expr).Type;
             }
             else if (property.AccessorList != null)
             {
-                var getter = property.AccessorList.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
+                AccessorDeclarationSyntax? getter = property.AccessorList.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
                 if (getter != null)
                 {
                     if (getter.ExpressionBody != null)
@@ -52,18 +54,18 @@ namespace Herta.Roslyn
                     }
                     else if (getter.Body != null)
                     {
-                        var ret = getter.Body.Statements.OfType<ReturnStatementSyntax>().FirstOrDefault();
+                        ReturnStatementSyntax? ret = getter.Body.Statements.OfType<ReturnStatementSyntax>().FirstOrDefault();
                         if (ret != null && ret.Expression != null)
                             getReturnType = context.SemanticModel.GetTypeInfo(ret.Expression).Type;
                     }
                 }
             }
 
-            if (getReturnType == null)
+            if (getReturnType == null || !getReturnType.IsValueType)
                 return;
             if (!SymbolEqualityComparer.Default.Equals(propertyType, getReturnType))
                 return;
-            var diagnostic = Diagnostic.Create(Rule, property.GetLocation(), symbol.Name);
+            Diagnostic diagnostic = Diagnostic.Create(Rule, property.GetLocation(), symbol.Name);
             context.ReportDiagnostic(diagnostic);
         }
     }

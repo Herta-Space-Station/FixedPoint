@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using NativeCollections;
 
 // ReSharper disable ALL
 
@@ -191,7 +192,43 @@ namespace Herta
         ///     where {0} represents the value of M00, {1} represents the value of M01, {2} represents the value of M10, and {3}
         ///     represents the value of M11. The values are formatted using the InvariantCulture.
         /// </returns>
-        public override string ToString() => string.Format((IFormatProvider)CultureInfo.InvariantCulture, "(({0}, {1}), ({2}, {3}))", (object)this.M00.AsFloat, (object)this.M01.AsFloat, (object)this.M10.AsFloat, (object)this.M11.AsFloat);
+        public override string ToString()
+        {
+            NativeString builder = new NativeString(stackalloc char[128], 0);
+            Format(ref builder);
+
+            return builder.ToString();
+        }
+
+        public bool TryFormat(Span<char> destination, out int charsWritten)
+        {
+            NativeString builder = new NativeString(stackalloc char[128], 0);
+            Format(ref builder);
+
+            bool result = builder.TryCopyTo(destination);
+            charsWritten = result ? builder.Length : 0;
+            return result;
+        }
+
+        private void Format(ref NativeString builder)
+        {
+            builder.Append('(');
+            builder.Append('(');
+            builder.AppendFormattable(this.M00.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M01.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(',');
+            builder.Append(' ');
+            builder.Append('(');
+            builder.AppendFormattable(this.M10.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(',');
+            builder.Append(' ');
+            builder.AppendFormattable(this.M11.AsFloat, default, (IFormatProvider)CultureInfo.InvariantCulture);
+            builder.Append(')');
+            builder.Append(')');
+        }
 
         /// <summary>Calculates the hash code for the FPMatrix2x2 object.</summary>
         /// <returns>The hash code value for the current instance.</returns>
