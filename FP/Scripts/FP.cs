@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using NativeCollections;
 
 #pragma warning disable CA2208
 #pragma warning disable CS8632

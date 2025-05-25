@@ -16,7 +16,7 @@ namespace Herta.Components
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Explicit)]
-    public struct Transform3D
+    public struct Transform3D : IFPComponent
     {
         /// <summary>
         ///     The size of the component (or struct/type) in-memory inside the Frame data-buffers or stack (when passed as value

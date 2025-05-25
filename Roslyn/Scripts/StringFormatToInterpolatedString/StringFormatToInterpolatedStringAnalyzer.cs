@@ -16,7 +16,7 @@ namespace Herta.Roslyn
     {
         public const string DIAGNOSTIC_ID = "MY0002";
 
-        private static readonly DiagnosticDescriptor Rule = new(DIAGNOSTIC_ID, "Use string interpolation instead of string.Format", "Use string interpolation instead of string.Format", "Style", DiagnosticSeverity.Warning, true);
+        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DIAGNOSTIC_ID, "Use string interpolation instead of string.Format", "Use string interpolation instead of string.Format", "Style", DiagnosticSeverity.Warning, true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 

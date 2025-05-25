@@ -1,6 +1,4 @@
-﻿using NativeCollections;
-
-// ReSharper disable ALL
+﻿// ReSharper disable ALL
 
 namespace Herta
 {
@@ -15,7 +13,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The FP value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, FP v)
+        public static bool AppendFormattable(ref this NativeString builder, in FP v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {
@@ -32,7 +30,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The FPMatrix2x2 value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, FPMatrix2x2 v)
+        public static bool AppendFormattable(ref this NativeString builder, in FPMatrix2x2 v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {
@@ -49,7 +47,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The FPMatrix3x3 value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, FPMatrix3x3 v)
+        public static bool AppendFormattable(ref this NativeString builder, in FPMatrix3x3 v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {
@@ -66,7 +64,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The FPMatrix4x4 value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, FPMatrix4x4 v)
+        public static bool AppendFormattable(ref this NativeString builder, in FPMatrix4x4 v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {
@@ -83,7 +81,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The FPQuaternion value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, FPQuaternion v)
+        public static bool AppendFormattable(ref this NativeString builder, in FPQuaternion v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {
@@ -100,7 +98,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The FPVector2 value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, FPVector2 v)
+        public static bool AppendFormattable(ref this NativeString builder, in FPVector2 v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {
@@ -117,7 +115,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The FPVector3 value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, FPVector3 v)
+        public static bool AppendFormattable(ref this NativeString builder, in FPVector3 v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {
@@ -134,7 +132,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The IntVector2 value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, IntVector2 v)
+        public static bool AppendFormattable(ref this NativeString builder, in IntVector2 v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {
@@ -151,7 +149,7 @@ namespace Herta
         /// <param name="builder">The NativeString builder to append to.</param>
         /// <param name="v">The IntVector3 value to append.</param>
         /// <returns>True if formatting and appending succeeded, false otherwise.</returns>
-        public static bool AppendFormattable(ref this NativeString builder, IntVector3 v)
+        public static bool AppendFormattable(ref this NativeString builder, in IntVector3 v)
         {
             if (v.TryFormat(builder.Space, out int charsWritten))
             {

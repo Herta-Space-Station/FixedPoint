@@ -19,8 +19,4 @@
       </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="NativeCollections" Version="1.5.1" />
-    </ItemGroup>
-
 </Project>
