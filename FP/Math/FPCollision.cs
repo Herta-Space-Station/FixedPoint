@@ -1400,8 +1400,8 @@ namespace Herta
             FPVector2 polygonPosition,
             FP polygonRotationSinInverse,
             FP polygonRotationCosInverse,
-            FPVector2[] polygonVertices,
-            FPVector2[] polygonNormals)
+            ReadOnlySpan<FPVector2> polygonVertices,
+            ReadOnlySpan<FPVector2> polygonNormals)
         {
             FPVector2 a = FPVector2.Rotate(circleCenter - polygonPosition, polygonRotationSinInverse, polygonRotationCosInverse);
             FP fp1 = -FP.MaxValue;
@@ -1443,8 +1443,8 @@ namespace Herta
             FP circleRadius,
             FPVector2 polygonPosition,
             FP polygonRotation,
-            FPVector2[] polygonVertices,
-            FPVector2[] polygonNormals)
+            ReadOnlySpan<FPVector2> polygonVertices,
+            ReadOnlySpan<FPVector2> polygonNormals)
         {
             FP sin;
             FP cos;

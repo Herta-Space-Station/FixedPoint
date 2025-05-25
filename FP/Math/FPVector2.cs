@@ -386,7 +386,7 @@ namespace Herta
         /// Rotation is counterclockwise.
         /// <param name="vectors"></param>
         /// <param name="radians"></param>
-        public static void Rotate(FPVector2[] vectors, FP radians)
+        public static void Rotate(Span<FPVector2> vectors, FP radians)
         {
             for (int index = 0; index < vectors.Length; ++index)
                 vectors[index] = FPVector2.Rotate(vectors[index], radians);
@@ -418,7 +418,7 @@ namespace Herta
         /// <param name="vectors"></param>
         /// <param name="sin"></param>
         /// <param name="cos"></param>
-        public static void Rotate(FPVector2[] vectors, FP sin, FP cos)
+        public static void Rotate(Span<FPVector2> vectors, FP sin, FP cos)
         {
             for (int index = 0; index < vectors.Length; ++index)
                 vectors[index] = FPVector2.Rotate(vectors[index], sin, cos);
@@ -785,7 +785,7 @@ namespace Herta
         /// </summary>
         /// <param name="vertices"></param>
         /// <returns></returns>
-        public static bool IsPolygonConvex(FPVector2[] vertices)
+        public static bool IsPolygonConvex(ReadOnlySpan<FPVector2> vertices)
         {
             bool flag1 = false;
             bool flag2 = false;
@@ -805,7 +805,15 @@ namespace Herta
             return true;
         }
 
-        private static FP CrossProductLength(FPVector2 A, FPVector2 B, FPVector2 C)
+        /// <summary>
+        ///     Calculates the cross product length for three points (A, B, C).
+        ///     This represents the signed area of the parallelogram formed by vectors BA and BC.
+        /// </summary>
+        /// <param name="A">The first point</param>
+        /// <param name="B">The second point (base point)</param>
+        /// <param name="C">The third point</param>
+        /// <returns>The signed cross product length (BA × BC)</returns>
+        public static FP CrossProductLength(FPVector2 A, FPVector2 B, FPVector2 C)
         {
             FP fp1 = A.X - B.X;
             FP fp2 = A.Y - B.Y;
@@ -817,7 +825,7 @@ namespace Herta
         /// <summary>Checks if the vertices of a polygon are clock-wise</summary>
         /// <param name="vertices">The vertices of the polygon</param>
         /// <returns><see langword="true" /> if the vertices are clock-wise aligned.</returns>
-        public static bool IsClockWise(FPVector2[] vertices)
+        public static bool IsClockWise(ReadOnlySpan<FPVector2> vertices)
         {
             FPVector2 fpVector2_1 = new FPVector2(vertices[1].X - vertices[0].X, vertices[1].Y - vertices[0].Y);
             FPVector2 fpVector2_2 = new FPVector2(vertices[2].X - vertices[1].X, vertices[2].Y - vertices[1].Y);
@@ -829,13 +837,13 @@ namespace Herta
         /// </summary>
         /// <param name="vertices">The vertices of the polygon</param>
         /// <returns><see langword="true" /> if the vertices are counter clock-wise aligned.</returns>
-        public static bool IsCounterClockWise(FPVector2[] vertices) => !FPVector2.IsClockWise(vertices);
+        public static bool IsCounterClockWise(ReadOnlySpan<FPVector2> vertices) => !FPVector2.IsClockWise(vertices);
 
         /// <summary>
         ///     Checks if the vertices of a polygon are clock-wise if not makes them counter clock-wise.
         /// </summary>
         /// <param name="vertices">The vertices of the polygon</param>
-        public static void MakeCounterClockWise(FPVector2[] vertices)
+        public static void MakeCounterClockWise(Span<FPVector2> vertices)
         {
             if (!FPVector2.IsClockWise(vertices))
                 return;
@@ -847,7 +855,7 @@ namespace Herta
         ///     in clock-wise order.
         /// </summary>
         /// <param name="vertices">The array of vertices</param>
-        public static void MakeClockWise(FPVector2[] vertices)
+        public static void MakeClockWise(Span<FPVector2> vertices)
         {
             if (!FPVector2.IsCounterClockWise(vertices))
                 return;
@@ -858,30 +866,27 @@ namespace Herta
         ///     Reverses the order of vertices in an array, effectively flipping the winding order of a polygon.
         /// </summary>
         /// <param name="vertices">The array of vertices representing the polygon</param>
-        public static void FlipWindingOrder(FPVector2[] vertices) => Array.Reverse<FPVector2>(vertices);
+        public static void FlipWindingOrder(Span<FPVector2> vertices) => vertices.Reverse();
 
         /// <summary>
-        ///     Calculates a normal for each edge of a polygon defined by <paramref name="vertices" />.
+        ///     Calculates a normal for each edge of a polygon defined by <paramref name="source" />.
         /// </summary>
-        /// <param name="vertices"></param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
         /// <returns></returns>
-        public static FPVector2[] CalculatePolygonNormals(FPVector2[] vertices)
+        public static bool CalculatePolygonNormals(ReadOnlySpan<FPVector2> source, Span<FPVector2> destination)
         {
-            FPVector2[] polygonNormals = new FPVector2[vertices.Length];
-            for (int index1 = 0; index1 < vertices.Length; ++index1)
-            {
-                int index2 = index1 + 1 < vertices.Length ? index1 + 1 : 0;
-                FPVector2 fpVector2 = vertices[index2] - vertices[index1];
-                if (fpVector2.X.RawValue == 0L)
-                {
-                    long rawValue = fpVector2.Y.RawValue;
-                }
+            if (destination.Length < source.Length)
+                return false;
 
-                polygonNormals[index1] = new FPVector2(fpVector2.Y, -fpVector2.X);
-                polygonNormals[index1] = polygonNormals[index1].Normalized;
+            for (int index1 = 0; index1 < source.Length; ++index1)
+            {
+                int index2 = index1 + 1 < source.Length ? index1 + 1 : 0;
+                FPVector2 fpVector2 = source[index2] - source[index1];
+                destination[index1] = new FPVector2(fpVector2.Y, -fpVector2.X).Normalized;
             }
 
-            return polygonNormals;
+            return true;
         }
 
         /// <summary>
@@ -889,7 +894,7 @@ namespace Herta
         /// </summary>
         /// <param name="vertices"></param>
         /// <returns></returns>
-        public static bool PolygonNormalsAreValid(FPVector2[] vertices)
+        public static bool PolygonNormalsAreValid(ReadOnlySpan<FPVector2> vertices)
         {
             for (int index1 = 0; index1 < vertices.Length; ++index1)
             {
@@ -902,17 +907,22 @@ namespace Herta
         }
 
         /// <summary>
-        ///     Shifts polygon defined by <paramref name="vertices" /> so that (0,0) becomes its center.
+        ///     Shifts polygon defined by <paramref name="source" /> so that (0,0) becomes its center.
         /// </summary>
-        /// <param name="vertices"></param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
         /// <returns></returns>
-        public static FPVector2[] RecenterPolygon(FPVector2[] vertices)
+        public static bool RecenterPolygon(ReadOnlySpan<FPVector2> source, Span<FPVector2> destination)
         {
-            FPVector2 polygonCentroid = FPVector2.CalculatePolygonCentroid(vertices);
-            FPVector2[] fpVector2Array = (FPVector2[])vertices.Clone();
-            for (int index = 0; index < vertices.Length; ++index)
-                fpVector2Array[index] = vertices[index] - polygonCentroid;
-            return fpVector2Array;
+            if (destination.Length < source.Length)
+                return false;
+
+            FPVector2 polygonCentroid = FPVector2.CalculatePolygonCentroid(source);
+
+            for (int index = 0; index < source.Length; ++index)
+                destination[index] = source[index] - polygonCentroid;
+
+            return true;
         }
 
         /// <summary>
@@ -920,7 +930,7 @@ namespace Herta
         /// </summary>
         /// <param name="vertices"></param>
         /// <returns></returns>
-        public static FP CalculatePolygonArea(FPVector2[] vertices)
+        public static FP CalculatePolygonArea(ReadOnlySpan<FPVector2> vertices)
         {
             FP fp = FP._0;
             for (int index = 0; index < vertices.Length; ++index)
@@ -937,7 +947,7 @@ namespace Herta
         /// </summary>
         /// <param name="vertices"></param>
         /// <returns></returns>
-        public static FPVector2 CalculatePolygonCentroid(FPVector2[] vertices)
+        public static FPVector2 CalculatePolygonCentroid(ReadOnlySpan<FPVector2> vertices)
         {
             FPVector2 polygonCentroid = new FPVector2();
             FP fp1 = FP._0;
@@ -972,7 +982,7 @@ namespace Herta
         /// <remarks>To compute a body mass moment of inertia, multiply the factor by the body mass.</remarks>
         /// <param name="vertices">The 2D vertices that define the polygon.</param>
         /// <returns>The mass moment of inertia factor of the polygon.</returns>
-        public static FP CalculatePolygonInertiaFactor(FPVector2[] vertices)
+        public static FP CalculatePolygonInertiaFactor(ReadOnlySpan<FPVector2> vertices)
         {
             FP polygonInertiaFactor = new FP();
             long num1 = 0;
@@ -1003,64 +1013,8 @@ namespace Herta
         /// <param name="localDir">The direction, in local space, in which the support point will be calculated.</param>
         /// <returns>The support point, in local space.</returns>
         public static FPVector2 CalculatePolygonLocalSupport(
-            FPVector2[] vertices,
+            ReadOnlySpan<FPVector2> vertices,
             ref FPVector2 localDir)
-        {
-            FPVector2 vertex1 = vertices[0];
-            FPVector2 polygonLocalSupport = vertex1;
-            long rawValue1 = FPVector2.Dot(vertex1, localDir).RawValue;
-            FPVector2 vertex2 = vertices[1];
-            long rawValue2 = FPVector2.Dot(vertex2, localDir).RawValue;
-            if (rawValue2 > rawValue1)
-            {
-                polygonLocalSupport = vertex2;
-                long num = rawValue2;
-                for (int index = 2; index < vertices.Length; ++index)
-                {
-                    FPVector2 vertex3 = vertices[index];
-                    long rawValue3 = FPVector2.Dot(vertex3, localDir).RawValue;
-                    if (rawValue3 > num)
-                    {
-                        polygonLocalSupport = vertex3;
-                        num = rawValue3;
-                    }
-                    else
-                        break;
-                }
-            }
-            else
-            {
-                FPVector2 vertex4 = vertices[vertices.Length - 1];
-                long rawValue4 = FPVector2.Dot(vertex4, localDir).RawValue;
-                if (rawValue4 > rawValue1)
-                {
-                    polygonLocalSupport = vertex4;
-                    long num = rawValue4;
-                    for (int index = vertices.Length - 2; index > 1; --index)
-                    {
-                        FPVector2 vertex5 = vertices[index];
-                        long rawValue5 = FPVector2.Dot(vertex5, localDir).RawValue;
-                        if (rawValue5 > num)
-                        {
-                            polygonLocalSupport = vertex5;
-                            num = rawValue5;
-                        }
-                        else
-                            break;
-                    }
-                }
-            }
-
-            return polygonLocalSupport;
-        }
-
-        /// <summary>
-        ///     Calculates the local support point of a polygon in a given direction.
-        /// </summary>
-        /// <param name="vertices">An array of vertices that make up the polygon.</param>
-        /// <param name="localDir">The direction for which to find the local support point.</param>
-        /// <returns>The local support point of the polygon in the given direction.</returns>
-        public static FPVector2 CalculatePolygonLocalSupport(ReadOnlySpan<FPVector2> vertices, ref FPVector2 localDir)
         {
             int verticesCount = vertices.Length;
             FPVector2 a1 = vertices[0];
@@ -1116,7 +1070,7 @@ namespace Herta
         /// </summary>
         /// <param name="vertices"></param>
         /// <returns></returns>
-        public static FP CalculatePolygonRadius(FPVector2[] vertices)
+        public static FP CalculatePolygonRadius(ReadOnlySpan<FPVector2> vertices)
         {
             FP polygonRadius = FP._0;
             for (int index = 0; index < vertices.Length; ++index)

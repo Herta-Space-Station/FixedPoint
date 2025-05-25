@@ -1153,6 +1153,13 @@ namespace Herta
         public static NativeString Create(ReadOnlySpan<char> buffer, int length) => new NativeString(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(buffer), buffer.Length), length);
 
         /// <summary>
+        ///     Empty
+        /// </summary>
+#pragma warning disable MY0001
+        public static NativeString Empty => new NativeString();
+#pragma warning restore MY0001
+
+        /// <summary>
         ///     Get enumerator
         /// </summary>
         public Span<char>.Enumerator GetEnumerator() => Text.GetEnumerator();
