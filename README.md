@@ -1,3 +1,1 @@
-# FixedPoint
-
-Q48.16
+![GIF](독.gif)
