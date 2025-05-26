@@ -11,12 +11,12 @@ namespace Herta
     [StructLayout(LayoutKind.Sequential, Size = 1)]
     public struct FPCollision
     {
-        private const int ClosestDistanceMaxShiftLeft = 4;
-        private const int ClosestDistanceMaxShiftRight = 8;
-        private const int ClosestDistanceShiftPerIterationLeft = 1;
-        private const int ClosestDistanceShiftPerIterationRight = 2;
-        private const long ClosestDistanceMinThresholdRaw = 8;
-        private const long ClosestDistanceMaxThresholdRaw = 2147483647;
+        public const int ClosestDistanceMaxShiftLeft = 4;
+        public const int ClosestDistanceMaxShiftRight = 8;
+        public const int ClosestDistanceShiftPerIterationLeft = 1;
+        public const int ClosestDistanceShiftPerIterationRight = 2;
+        public const long ClosestDistanceMinThresholdRaw = 8;
+        public const long ClosestDistanceMaxThresholdRaw = 2147483647;
 
         /// <summary>
         ///     Returns the center of a triangle defined by three vertices.
@@ -26,37 +26,6 @@ namespace Herta
         /// <param name="v2"></param>
         /// <returns></returns>
         public static FPVector2 TriangleCenter(FPVector2 v0, FPVector2 v1, FPVector2 v2) => FPVector2.Lerp(FPVector2.Lerp(v0, v1, FP._0_50), v2, FP._0_50);
-
-        private static bool ClosestPointOnLine(
-            FPVector2 line_p0,
-            FPVector2 line_p1,
-            FPVector2 c_center,
-            FP c_radius,
-            out FPVector2 point)
-        {
-            FPVector2 a = c_center - line_p0;
-            FPVector2 fpVector2 = c_center - line_p1;
-            FPVector2 b = line_p1 - line_p0;
-            FP fp1 = c_radius * c_radius;
-            FP sqrMagnitude = b.SqrMagnitude;
-            FP fp2 = FPVector2.Dot(a, b) / sqrMagnitude;
-            if (fp2.RawValue < 0L && a.SqrMagnitude.RawValue > fp1.RawValue)
-            {
-                point = new FPVector2();
-                return false;
-            }
-
-            if (fp2.RawValue > 65536L && fpVector2.SqrMagnitude.RawValue > fp1.RawValue)
-            {
-                point = new FPVector2();
-                return false;
-            }
-
-            point = line_p0 + b * fp2;
-            point.X = FPMath.Clamp(point.X, FPMath.Min(line_p0.X, line_p1.X), FPMath.Max(line_p0.X, line_p1.X));
-            point.Y = FPMath.Clamp(point.Y, FPMath.Min(line_p0.Y, line_p1.Y), FPMath.Max(line_p0.Y, line_p1.Y));
-            return true;
-        }
 
         /// <summary>
         ///     Returns <see langword="true" /> if a point <paramref name="point" /> lies on a line crossing <paramref name="p1" />
@@ -79,25 +48,6 @@ namespace Herta
             long num2 = (p1.Y.RawValue - p2.Y.RawValue << 16) / num1;
             long num3 = p2.Y.RawValue - (num2 * p2.X.RawValue + 32768L >> 16);
             return point.Y.RawValue == (num2 * point.X.RawValue + 32768L >> 16) + num3;
-        }
-
-        /// <summary>
-        ///     Returns <see langword="true" /> if a point <paramref name="point" /> lies on a segment defined by
-        ///     <paramref name="p1" /> and <paramref name="p2" />.
-        /// </summary>
-        /// <param name="p1"></param>
-        /// <param name="p2"></param>
-        /// <param name="point"></param>
-        /// <returns></returns>
-        internal static bool IsPointOnLineSegment(FPVector2 p1, FPVector2 p2, FPVector2 point)
-        {
-            if (((point.Y.RawValue - p1.Y.RawValue) * (p2.X.RawValue - p1.X.RawValue) + 32768L >> 16) - ((point.X.RawValue - p1.X.RawValue) * (p2.Y.RawValue - p1.Y.RawValue) + 32768L >> 16) != 0L)
-                return false;
-            long num1 = ((point.X.RawValue - p1.X.RawValue) * (p2.X.RawValue - p1.X.RawValue) + 32768L >> 16) + ((point.Y.RawValue - p1.Y.RawValue) * (p2.Y.RawValue - p1.Y.RawValue) + 32768L >> 16);
-            if (num1 < 0L)
-                return false;
-            long num2 = ((p2.X.RawValue - p1.X.RawValue) * (p2.X.RawValue - p1.X.RawValue) + 32768L >> 16) + ((p2.Y.RawValue - p1.Y.RawValue) * (p2.Y.RawValue - p1.Y.RawValue) + 32768L >> 16);
-            return num1 <= num2;
         }
 
         /// <summary>

@@ -16,10 +16,10 @@ namespace Herta
         public const int SIZE = 8;
 
         /// <summary>The value.</summary>
-        [FieldOffset(0)] public ulong _value;
+        [FieldOffset(0)] public ulong RawValue;
 
-        private const ulong HasValueBit = 9223372036854775808;
-        private const ulong ValueMask = 9223372036854775807;
+        public const ulong HasValueBit = 9223372036854775808;
+        public const ulong ValueMask = 9223372036854775807;
 
         /// <summary>
         ///     Returns <see langword="true" /> if this nullable has a value.
@@ -27,7 +27,7 @@ namespace Herta
         public bool HasValue
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (this._value & 9223372036854775808UL) > 0UL;
+            get => (this.RawValue & 9223372036854775808UL) > 0UL;
         }
 
         /// <summary>Returns current value.</summary>
@@ -43,7 +43,7 @@ namespace Herta
                 if (!this.HasValue)
                     throw new NullReferenceException();
                 FP fp;
-                fp.RawValue = (long)this._value & long.MaxValue;
+                fp.RawValue = (long)this.RawValue & long.MaxValue;
                 return fp;
             }
         }
@@ -57,7 +57,7 @@ namespace Herta
         public FP ValueOrDefault()
         {
             FP fp;
-            fp.RawValue = (long)this._value & long.MaxValue;
+            fp.RawValue = (long)this.RawValue & long.MaxValue;
             return fp;
         }
 
@@ -78,7 +78,7 @@ namespace Herta
             }
 
             NullableNonNegativeFP nullableNonNegativeFp;
-            nullableNonNegativeFp._value = (ulong)(v.RawValue | long.MinValue);
+            nullableNonNegativeFp.RawValue = (ulong)(v.RawValue | long.MinValue);
             return nullableNonNegativeFp;
         }
 

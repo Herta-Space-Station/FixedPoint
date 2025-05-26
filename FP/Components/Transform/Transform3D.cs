@@ -25,8 +25,8 @@ namespace Herta.Components
         /// </summary>
         public const int SIZE = 64;
 
-        internal const int OFFSET_POS = 0;
-        internal const int OFFSET_ROT = 24;
+        public const int OFFSET_POS = 0;
+        public const int OFFSET_ROT = 24;
 
         /// <summary>The world position of the entity.</summary>
         [FieldOffset(0)] public FPVector3 Position;
