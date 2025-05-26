@@ -11,12 +11,16 @@ namespace Test
 {
     internal sealed class Program
     {
-        public static bool Compare<T1, T2>(in T1 arg1, in T2 arg2) where T1 : unmanaged where T2 : unmanaged
-        {
-            return MemoryMarshal.CreateSpan(ref Unsafe.As<T1, byte>(ref Unsafe.AsRef(in arg1)), Unsafe.SizeOf<T1>()).SequenceEqual(MemoryMarshal.CreateSpan(ref Unsafe.As<T2, byte>(ref Unsafe.AsRef(in arg2)), Unsafe.SizeOf<T2>()));
-        }
+        public static bool Compare<T1, T2>(in T1 arg1, in T2 arg2) where T1 : unmanaged where T2 : unmanaged => MemoryMarshal.CreateSpan(ref Unsafe.As<T1, byte>(ref Unsafe.AsRef(in arg1)), Unsafe.SizeOf<T1>()).SequenceEqual(MemoryMarshal.CreateSpan(ref Unsafe.As<T2, byte>(ref Unsafe.AsRef(in arg2)), Unsafe.SizeOf<T2>()));
 
         static void Main()
+        {
+            using NativeTempBuffer<FP> temp = NativeTempBuffer<FP>.Create(1.5, -1.5, 0, 100, -100);
+            FP min = FPMath.Min(temp.AsReadOnlySpan());
+            Console.WriteLine(min);
+        }
+
+        static void Test3()
         {
             for (uint num3 = 0; num3 < 65536; num3++)
             {

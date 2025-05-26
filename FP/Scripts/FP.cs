@@ -49,9 +49,9 @@ namespace Herta
         /// </summary>
         public const int SIZE = 8;
 
-        internal const int DecimalFractionDigits = 5;
-        internal const double DecimalFractionNormalizer = 100000.0;
-        private const int FRACTIONS_COUNT = 5;
+        public const int DecimalFractionDigits = 5;
+        public const double DecimalFractionNormalizer = 100000.0;
+        public const int FRACTIONS_COUNT = 5;
 
         /// <summary>The value of one as a fixed-point number.</summary>
         public const long RAW_ONE = 65536;
@@ -658,15 +658,6 @@ namespace Herta
         }
 
         /// <summary>
-        ///     Converts the value of the current FP object to its equivalent string representation using the legacy format.
-        /// </summary>
-        /// <returns>
-        ///     The string representation of the value of the current FP object, formatted using the legacy format.
-        /// </returns>
-        [Obsolete("Use ToString instead.")]
-        public string ToStringLegacy() => this.AsFloat.ToString((IFormatProvider)CultureInfo.InvariantCulture);
-
-        /// <summary>
         ///     Returns a string that represents the <see cref="T:Herta.FP" />.
         /// </summary>
         /// <returns>String representation of the FP.</returns>
@@ -840,15 +831,6 @@ namespace Herta
             fp.RawValue = value;
             return fp;
         }
-
-        /// <summary>
-        ///     Creates an instance of FP from a string representation of a float value.
-        ///     This method is marked as unsafe because it is not deterministic.
-        /// </summary>
-        /// <param name="value">The string representation of the float value.</param>
-        /// <returns>An instance of FP representing the float value.</returns>
-        [Obsolete("Use FromString instead.")]
-        public static FP FromString_UNSAFE(ReadOnlySpan<char> value) => FP.FromFloat_UNSAFE((float)double.Parse(value, NumberStyles.Float | NumberStyles.AllowThousands, (IFormatProvider)CultureInfo.InvariantCulture));
 
         public static FP Parse(ReadOnlySpan<char> s)
         {

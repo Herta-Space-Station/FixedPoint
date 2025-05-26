@@ -17,15 +17,15 @@ namespace Herta
         /// <summary>
         ///     If 1, then <see cref="F:Herta.NullableFP._value" /> is valid.
         /// </summary>
-        [FieldOffset(0)] public long _hasValue;
+        [FieldOffset(0)] public long RawHasValue;
 
         /// <summary>The value.</summary>
-        [FieldOffset(8)] public FP _value;
+        [FieldOffset(8)] public FP RawValue;
 
         /// <summary>
         ///     Returns <see langword="true" /> if this nullable has a value.
         /// </summary>
-        public bool HasValue => this._hasValue == 1L;
+        public bool HasValue => this.RawHasValue == 1L;
 
         /// <summary>Returns current value.</summary>
         /// <exception cref="T:System.NullReferenceException">
@@ -36,9 +36,9 @@ namespace Herta
         {
             get
             {
-                if (this._hasValue == 0L)
+                if (this.RawHasValue == 0L)
                     throw new NullReferenceException();
-                return this._value;
+                return this.RawValue;
             }
         }
 
@@ -48,7 +48,7 @@ namespace Herta
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        public FP ValueOrDefault(FP v) => this._hasValue != 1L ? v : this.Value;
+        public FP ValueOrDefault(FP v) => this.RawHasValue != 1L ? v : this.Value;
 
         /// <summary>
         ///     Converts <paramref name="v" /> to NullableFP.
@@ -57,8 +57,8 @@ namespace Herta
         /// <returns></returns>
         public static implicit operator NullableFP(FP v) => new NullableFP()
         {
-            _value = v,
-            _hasValue = 1
+            RawValue = v,
+            RawHasValue = 1
         };
 
         /// <summary>

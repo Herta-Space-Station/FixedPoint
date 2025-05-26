@@ -409,14 +409,6 @@ namespace Herta
         }
 
         /// <summary>
-        ///     Obsolete. Use one of the overloads that receive either only a forward direction (uses FPVector3.Up as up direction,
-        ///     not ortho-normalized)
-        ///     OR forward and up directions, which can be optionally ortho-normalized.
-        /// </summary>
-        [Obsolete("Use one of the overloads that receive either only a forward direction (uses FPVector3.Up as up direction, not ortho-normalized), OR forward and up directions, which can be optionally ortho-normalized.")]
-        public static FPQuaternion LookRotation(FPVector3 forward, bool orthoNormalize) => FPQuaternion.LookRotation(forward);
-
-        /// <summary>
         ///     Creates a rotation with the specified <paramref name="forward" /> direction and
         ///     <see cref="P:Herta.FPVector3.Up" />.
         /// </summary>
@@ -488,24 +480,6 @@ namespace Herta
             fpQuaternion.Z = FP._0_50 * fp8;
             fpQuaternion.W = (normalized.Y - up.X) * fp9;
             return fpQuaternion;
-        }
-
-        [Obsolete("SimpleLookAt is a cheaper version of LookRotation, but there are no extensive tests to ensure its correctness and equivalency to Unity's Quaternion.LookRotation as the latter has. We recommend using LookRotation instead.")]
-        public static FPQuaternion SimpleLookAt(FPVector3 direction) => FPQuaternion.SimpleLookAt(direction, FPVector3.Forward, FPVector3.Up);
-
-        [Obsolete("SimpleLookAt is a cheaper version of LookRotation, but there are no extensive tests to ensure its correctness and equivalency to Unity's Quaternion.LookRotation as the latter has. We recommend using LookRotation instead.")]
-        public static FPQuaternion SimpleLookAt(FPVector3 direction, FPVector3 up) => FPQuaternion.SimpleLookAt(direction, FPVector3.Forward, up);
-
-        [Obsolete("SimpleLookAt is a cheaper version of LookRotation, but there are no extensive tests to ensure its correctness and equivalency to Unity's Quaternion.LookRotation as the latter has. We recommend using LookRotation instead.")]
-        public static FPQuaternion SimpleLookAt(
-            FPVector3 direction,
-            FPVector3 forward,
-            FPVector3 up)
-        {
-            FPVector3 axis = FPVector3.Cross(forward, direction);
-            if (axis.SqrMagnitude < FP.EN4)
-                axis = up;
-            return FPQuaternion.AngleAxis(FPMath.Acos(FPVector3.Dot(forward, direction)), axis);
         }
 
         /// <summary>
