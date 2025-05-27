@@ -60,7 +60,7 @@ namespace Herta
         {
             if (value <= 0)
                 throw new InvalidOperationException("Number must be positive");
-            return (int)BitOperationsHelpers.RoundUpToPowerOf2((uint)value);
+            return (int)MathB.RoundUpToPowerOf2((uint)value);
         }
 
         /// <summary>Returns the absolute value of the argument.</summary>
@@ -470,7 +470,7 @@ namespace Herta
                 return (long)(FPLut.SqrtAprox[(int)x] >> 6);
             }
 
-            int log2 = BitOperationsHelpers.Log2((ulong)x);
+            int log2 = MathB.Log2((ulong)x);
             int num2 = log2 & ~1;
             int num3 = num2 - 16 + 2;
 
@@ -492,7 +492,7 @@ namespace Herta
                 };
             }
 
-            int log2 = BitOperationsHelpers.Log2((ulong)x);
+            int log2 = MathB.Log2((ulong)x);
             int num2 = log2 & ~1;
             int num3 = num2 - 16 + 2;
 
@@ -734,7 +734,7 @@ namespace Herta
         private static int Log2FloorToIntRaw(long x)
         {
             ulong num1 = x > 0L ? (ulong)x : throw new ArgumentOutOfRangeException(nameof(x), "The number has to be positive");
-            return BitOperationsHelpers.Log2(num1) - 16;
+            return MathB.Log2(num1) - 16;
         }
 
         private static long Log2RawAdditionalPrecision(long x)
