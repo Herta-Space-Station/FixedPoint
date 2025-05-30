@@ -11,7 +11,7 @@ namespace Herta
     {
         [FieldOffset(0)] public readonly Int128 RawValue;
         public double AsDouble => (double)RawValue / SCALE_DOUBLE;
-        public const int PRECISION = 52;
+        public const int PRECISION = 53;
         public static readonly Int128 SCALE_INT128 = (Int128)1 << PRECISION;
         public static readonly double SCALE_DOUBLE = (double)SCALE_INT128;
         public static readonly FP128HighPrecisionDivisor MaxValue = new(Int128.MaxValue >> PRECISION);
