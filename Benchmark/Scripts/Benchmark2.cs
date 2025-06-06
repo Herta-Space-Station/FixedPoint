@@ -34,7 +34,7 @@ namespace Benchmark
             Input3 = new(Count);
             for (int i = 0; i < Count; i++)
             {
-                var a = Random.Shared.NextDouble();
+                double a = Random.Shared.NextDouble();
                 Input1.Add(a);
                 Input2.Add(a);
                 Input3.Add(a);

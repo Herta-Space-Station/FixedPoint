@@ -15,24 +15,7 @@ namespace Test
 
         static void Main()
         {
-            double val1 = 1.23456789;
-            double val2 = -9.87654321;
-
-            FP a = val1;
-            a *= val2;
-            Console.WriteLine(a.AsDouble);
-
-            FP128HighPrecisionDivisor b = val1;
-            b *= val2;
-            Console.WriteLine(b.AsDouble);
-
-            double c = val1;
-            c *= val2;
-            Console.WriteLine(c);
-
-            FP128 d = val1;
-            d *= val2;
-            Console.WriteLine(d.AsDouble);
+            Console.WriteLine(TestGenerator._Sb);
         }
 
         static void Test3()

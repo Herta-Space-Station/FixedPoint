@@ -333,8 +333,8 @@ namespace TrueSync {
             // Take fractional part of exponent
             x = FP.FromRaw(x.RawValue & 0x00000000FFFFFFFF);
 
-            var result = FP.One;
-            var term = FP.One;
+            FP result = FP.One;
+            FP term = FP.One;
             int i = 1;
             while (term.RawValue != 0)
             {
@@ -386,7 +386,7 @@ namespace TrueSync {
                 y += FP.ONE;
             }
 
-            var z = FP.FromRaw(rawX);
+            FP z = FP.FromRaw(rawX);
 
             for (int i = 0; i < FP.FRACTIONAL_PLACES; i++)
             {

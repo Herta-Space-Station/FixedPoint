@@ -152,8 +152,8 @@ namespace Herta
         public static int Log10(uint value)
         {
             value |= 1;
-            var num1 = Log2(value) + 1;
-            var num2 = (num1 * 0x4D1) >> 0xC;
+            int num1 = Log2(value) + 1;
+            int num2 = (num1 * 0x4D1) >> 0xC;
             return value < Unsafe.Add(ref MemoryMarshal.GetReference(PowersOf10), num2) ? num2 - 1 : num2;
         }
 
@@ -161,8 +161,8 @@ namespace Herta
         public static int Log10(ulong value)
         {
             value |= 1;
-            var num1 = Log2(value) + 1;
-            var num2 = (num1 * 0x4D1) >> 0xC;
+            int num1 = Log2(value) + 1;
+            int num2 = (num1 * 0x4D1) >> 0xC;
             return value < Unsafe.Add(ref MemoryMarshal.GetReference(PowersOf10), num2) ? num2 - 1 : num2;
         }
 

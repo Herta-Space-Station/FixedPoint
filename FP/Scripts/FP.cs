@@ -727,6 +727,10 @@ namespace Herta
             // Reinterpret the double as a long (IEEE 754 binary64 format)
             long bits = Unsafe.As<double, long>(ref value);
 
+            // Handle zero specially to avoid issues with denormals
+            if (bits == 0)
+                return 0;
+
             // Extract sign (1 bit)
             bool isNegative = (bits & unchecked((long)0x8000000000000000)) != 0;
 
