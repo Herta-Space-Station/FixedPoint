@@ -15,7 +15,7 @@ namespace Herta
         {
             Span<byte> data = stackalloc byte[4];
             RandomNumberGenerator.Fill(data);
-            XXHASH_32_SEED = Unsafe.ReadUnaligned<byte>(ref MemoryMarshal.GetReference(data));
+            XXHASH_32_SEED = Unsafe.ReadUnaligned<uint>(ref MemoryMarshal.GetReference(data));
         }
 
         public static uint Exchange(uint seed)
